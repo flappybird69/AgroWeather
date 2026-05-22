@@ -210,45 +210,6 @@ struct WeatherCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-        case .evapotranspiration:
-            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                Text(String(format: "%.1f", viewModel.currentEvapotranspiration ?? 0))
-                    .font(.system(size: valueSize, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                Text("mm")
-                    .font(.system(size: compact ? 14 : 22, weight: .medium))
-                    .foregroundColor(.white.opacity(0.7))
-                    .padding(.bottom, compact ? 2 : 4)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-        case .soilTemperature:
-            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                Text(String(format: "%.1f", viewModel.currentSoilTemperature ?? 0))
-                    .font(.system(size: valueSize, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                Text("°C")
-                    .font(.system(size: compact ? 14 : 22, weight: .medium))
-                    .foregroundColor(.white.opacity(0.7))
-                    .padding(.bottom, compact ? 2 : 4)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-
-        case .vaporPressureDeficit:
-            HStack(alignment: .lastTextBaseline, spacing: 4) {
-                Text(String(format: "%.2f", viewModel.currentVPD ?? 0))
-                    .font(.system(size: compact ? 24 : 44, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
-                Text("kPa")
-                    .font(.system(size: compact ? 12 : 20, weight: .medium))
-                    .foregroundColor(.white.opacity(0.7))
-                    .padding(.bottom, compact ? 2 : 4)
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
 
     @ViewBuilder
     private var footer: some View {
