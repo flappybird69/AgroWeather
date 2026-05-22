@@ -182,25 +182,45 @@ struct DashboardView: View {
 
     private var premiumCards: some View {
         VStack(spacing: 12) {
-            if viewModel.isLoading && viewModel.weatherData == nil {
-                cardRow(types: [.soilMoisture, .evapotranspiration], loading: true)
-                cardRow(types: [.soilTemperature, .vaporPressureDeficit], loading: true)
-            } else if viewModel.weatherData != nil {
-                cardRow(types: [.soilMoisture, .evapotranspiration], loading: false)
-                cardRow(types: [.soilTemperature, .vaporPressureDeficit], loading: false)
+            if viewModel.weatherData != nil {
+                cardRow(types: [.soilMoisture, .evapotranspiration])
+                cardRow(types: [.soilTemperature, .vaporPressureDeficit])
+            } else if viewModel.isLoading {
+                loadingGrid
             } else if !viewModel.isLoading {
                 errorState
             }
         }
     }
 
-    private func cardRow(types: [WeatherCardType], loading: Bool) -> some View {
+    private func cardRow(types: [WeatherCardType]) -> some View {
         HStack(spacing: 12) {
             ForEach(types, id: \.self) { type in
-                WeatherCardView(type: type, isLoading: loading)
+                WeatherCardView(type: type)
             }
         }
         .frame(height: 120)
+    }
+
+    private var loadingGrid: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 12) {
+                loadingCard
+                loadingCard
+            }
+            .frame(height: 120)
+            HStack(spacing: 12) {
+                loadingCard
+                loadingCard
+            }
+            .frame(height: 120)
+        }
+    }
+
+    private var loadingCard: some View {
+        RoundedRectangle(cornerRadius: 16)
+            .fill(Color(.secondarySystemGroupedBackground))
+            .overlay(ProgressView().tint(.agroGreen))
     }
 
     private var errorState: some View {

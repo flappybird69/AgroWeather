@@ -78,7 +78,7 @@ struct ProfileEditView: View {
         .sheet(isPresented: $showPhotoPicker) {
             PhotoPicker(images: Binding(
                 get: { profileImage.map { [$0] } ?? [] },
-                set: { profileImage = $0.first; if let img = $0.first { saveImage() } }
+                set: { profileImage = $0.first; if $0.first != nil { saveImage() } }
             ))
         }
     }
@@ -98,7 +98,7 @@ struct ProfileEditView: View {
     }
 
     private func saveAndDismiss() {
-        if let img = profileImage { saveImage() }
+        if profileImage != nil { saveImage() }
         dismiss()
     }
 }

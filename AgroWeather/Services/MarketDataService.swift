@@ -52,11 +52,11 @@ actor MarketDataService {
                   let values = json[1] as? [[Any]] else { continue }
 
             let recentValues = values.prefix(4).compactMap { entry -> (Double, String)? in
-                guard let arr = entry as? [Any], arr.count >= 3,
-                      let value = arr[1] as? Double,
-                      let date = arr[2] as? String else {
-                    if let arr = entry as? [Any], arr.count >= 2,
-                       let value = arr[1] as? Double {
+                guard entry.count >= 3,
+                      let value = entry[1] as? Double,
+                      let date = entry[2] as? String else {
+                    if entry.count >= 2,
+                       let value = entry[1] as? Double {
                         return (value, "2024")
                     }
                     return nil

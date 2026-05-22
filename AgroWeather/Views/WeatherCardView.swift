@@ -46,7 +46,6 @@ enum WeatherCardType: CaseIterable {
 struct WeatherCardView: View {
     @Environment(WeatherViewModel.self) private var viewModel
     let type: WeatherCardType
-    var isLoading: Bool = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -70,10 +69,10 @@ struct WeatherCardView: View {
                 .font(.caption)
                 .foregroundColor(.white.opacity(0.7))
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
         .background(type.gradient)
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .redacted(reason: isLoading ? .placeholder : [])
     }
 
     @ViewBuilder
