@@ -1,0 +1,501 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B0000001 /* AgroWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000001 /* AgroWeatherApp.swift */; };
+		B0000002 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002 /* Extensions.swift */; };
+		B0000003 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000003 /* Field.swift */; };
+		B0000004 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000004 /* WeatherResponse.swift */; };
+		B0000005 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000005 /* WeatherData.swift */; };
+		B0000006 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000006 /* WeatherService.swift */; };
+		B0000007 /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000007 /* WeatherViewModel.swift */; };
+		B0000008 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000008 /* ContentView.swift */; };
+		B0000009 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000009 /* DashboardView.swift */; };
+		B000000A /* WeatherCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000000A /* WeatherCardView.swift */; };
+		B000000B /* FrostWarningBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000000B /* FrostWarningBanner.swift */; };
+		B000000C /* FieldManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000000C /* FieldManagementView.swift */; };
+		B000000D /* AddFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000000D /* AddFieldView.swift */; };
+		B000000F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0000010 /* Assets.xcassets */; };
+		B0000010 /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000012 /* HapticManager.swift */; };
+		B0000011 /* RSSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000013 /* RSSItem.swift */; };
+		B0000012 /* RSSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000014 /* RSSService.swift */; };
+		B0000013 /* NewsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000015 /* NewsListView.swift */; };
+		B0000014 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000016 /* SplashScreen.swift */; };
+		B0000015 /* FieldComparisonCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000017 /* FieldComparisonCard.swift */; };
+		B0000016 /* FarmingAdvisor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000018 /* FarmingAdvisor.swift */; };
+		B0000017 /* AdvisorySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000019 /* AdvisorySection.swift */; };
+		B0000018 /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001A /* ForecastView.swift */; };
+		B0000019 /* FarmLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001B /* FarmLogView.swift */; };
+		B000001A /* KnowledgeBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001C /* KnowledgeBase.swift */; };
+		B000001B /* AgriBotEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001D /* AgriBotEngine.swift */; };
+		B000001C /* AgriBotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001E /* AgriBotView.swift */; };
+		B000001D /* MarketDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000001F /* MarketDataService.swift */; };
+		B000001E /* FarmLogEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000020 /* FarmLogEntry.swift */; };
+		B000001F /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000021 /* ReminderManager.swift */; };
+		B0000020 /* ImagePickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000022 /* ImagePickers.swift */; };
+		B0000021 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000023 /* ImageManager.swift */; };
+		B0000022 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000024 /* SettingsView.swift */; };
+		B0000023 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000025 /* OnboardingView.swift */; };
+		B0000024 /* ProfileCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000026 /* ProfileCard.swift */; };
+		B0000025 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000027 /* ProfileEditView.swift */; };
+		B0000026 /* LocalWeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000028 /* LocalWeatherCard.swift */; };
+		B0000027 /* WeatherKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000029 /* WeatherKitService.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A0000001 /* AgroWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgroWeatherApp.swift; sourceTree = "<group>"; };
+		A0000002 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A0000003 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		A0000004 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
+		A0000005 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		A0000006 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		A0000007 /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		A0000008 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A0000009 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		A000000A /* WeatherCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCardView.swift; sourceTree = "<group>"; };
+		A000000B /* FrostWarningBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrostWarningBanner.swift; sourceTree = "<group>"; };
+		A000000C /* FieldManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldManagementView.swift; sourceTree = "<group>"; };
+		A000000D /* AddFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFieldView.swift; sourceTree = "<group>"; };
+		A000000E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A000000F /* AgroWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgroWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0000010 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A0000011 /* AgroWeather.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AgroWeather.entitlements; sourceTree = "<group>"; };
+		A0000012 /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		A0000013 /* RSSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSItem.swift; sourceTree = "<group>"; };
+		A0000014 /* RSSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSService.swift; sourceTree = "<group>"; };
+		A0000015 /* NewsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListView.swift; sourceTree = "<group>"; };
+		A0000016 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		A0000017 /* FieldComparisonCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldComparisonCard.swift; sourceTree = "<group>"; };
+		A0000018 /* FarmingAdvisor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmingAdvisor.swift; sourceTree = "<group>"; };
+		A0000019 /* AdvisorySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvisorySection.swift; sourceTree = "<group>"; };
+		A000001A /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
+		A000001B /* FarmLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmLogView.swift; sourceTree = "<group>"; };
+		A000001C /* KnowledgeBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeBase.swift; sourceTree = "<group>"; };
+		A000001D /* AgriBotEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgriBotEngine.swift; sourceTree = "<group>"; };
+		A000001E /* AgriBotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgriBotView.swift; sourceTree = "<group>"; };
+		A000001F /* MarketDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketDataService.swift; sourceTree = "<group>"; };
+		A0000020 /* FarmLogEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FarmLogEntry.swift; sourceTree = "<group>"; };
+		A0000021 /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
+		A0000022 /* ImagePickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickers.swift; sourceTree = "<group>"; };
+		A0000023 /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		A0000024 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A0000025 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A0000026 /* ProfileCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCard.swift; sourceTree = "<group>"; };
+		A0000027 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		A0000028 /* LocalWeatherCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeatherCard.swift; sourceTree = "<group>"; };
+		A0000029 /* WeatherKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F0000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G0000001 = {
+			isa = PBXGroup;
+			children = (
+				G0000002 /* AgroWeather */,
+				G0000007 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G0000002 /* AgroWeather */ = {
+			isa = PBXGroup;
+			children = (
+				A0000001 /* AgroWeatherApp.swift */,
+				A0000002 /* Extensions.swift */,
+				A000000E /* Info.plist */,
+				A0000010 /* Assets.xcassets */,
+				A0000011 /* AgroWeather.entitlements */,
+				G0000003 /* Models */,
+				G0000004 /* Services */,
+				G0000005 /* ViewModels */,
+				G0000006 /* Views */,
+			);
+			path = AgroWeather;
+			sourceTree = "<group>";
+		};
+		G0000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A0000003 /* Field.swift */,
+				A0000004 /* WeatherResponse.swift */,
+				A0000005 /* WeatherData.swift */,
+				A0000013 /* RSSItem.swift */,
+				A0000018 /* FarmingAdvisor.swift */,
+				A000001C /* KnowledgeBase.swift */,
+				A0000020 /* FarmLogEntry.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		G0000004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A0000006 /* WeatherService.swift */,
+				A0000012 /* HapticManager.swift */,
+				A0000014 /* RSSService.swift */,
+				A000001D /* AgriBotEngine.swift */,
+				A000001F /* MarketDataService.swift */,
+				A0000021 /* ReminderManager.swift */,
+				A0000023 /* ImageManager.swift */,
+				A0000029 /* WeatherKitService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		G0000005 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				A0000007 /* WeatherViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		G0000006 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A0000008 /* ContentView.swift */,
+				A0000009 /* DashboardView.swift */,
+				A000000A /* WeatherCardView.swift */,
+				A000000B /* FrostWarningBanner.swift */,
+				A000000C /* FieldManagementView.swift */,
+				A000000D /* AddFieldView.swift */,
+				A0000015 /* NewsListView.swift */,
+				A0000016 /* SplashScreen.swift */,
+				A0000017 /* FieldComparisonCard.swift */,
+				A0000019 /* AdvisorySection.swift */,
+				A000001A /* ForecastView.swift */,
+				A000001B /* FarmLogView.swift */,
+				A000001E /* AgriBotView.swift */,
+				A0000022 /* ImagePickers.swift */,
+				A0000024 /* SettingsView.swift */,
+				A0000025 /* OnboardingView.swift */,
+				A0000026 /* ProfileCard.swift */,
+				A0000027 /* ProfileEditView.swift */,
+				A0000028 /* LocalWeatherCard.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		G0000007 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A000000F /* AgroWeather.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T0000001 /* AgroWeather */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CL0000002 /* Build configuration list for PBXNativeTarget "AgroWeather" */;
+			buildPhases = (
+				S0000001 /* Sources */,
+				F0000001 /* Frameworks */,
+				R0000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AgroWeather;
+			productName = AgroWeather;
+			productReference = A000000F /* AgroWeather.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P0000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					T0000001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = CL0000001 /* Build configuration list for PBXProject "AgroWeather" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = "el-GR";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				"el-GR",
+				en,
+				el,
+				Base,
+			);
+			mainGroup = G0000001;
+			productRefGroup = G0000007 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T0000001 /* AgroWeather */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R0000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B000000F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S0000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0000001 /* AgroWeatherApp.swift in Sources */,
+				B0000002 /* Extensions.swift in Sources */,
+				B0000003 /* Field.swift in Sources */,
+				B0000004 /* WeatherResponse.swift in Sources */,
+				B0000005 /* WeatherData.swift in Sources */,
+				B0000006 /* WeatherService.swift in Sources */,
+				B0000007 /* WeatherViewModel.swift in Sources */,
+				B0000008 /* ContentView.swift in Sources */,
+				B0000009 /* DashboardView.swift in Sources */,
+				B000000A /* WeatherCardView.swift in Sources */,
+				B000000B /* FrostWarningBanner.swift in Sources */,
+				B000000C /* FieldManagementView.swift in Sources */,
+				B000000D /* AddFieldView.swift in Sources */,
+				B0000010 /* HapticManager.swift in Sources */,
+				B0000011 /* RSSItem.swift in Sources */,
+				B0000012 /* RSSService.swift in Sources */,
+				B0000013 /* NewsListView.swift in Sources */,
+				B0000014 /* SplashScreen.swift in Sources */,
+				B0000015 /* FieldComparisonCard.swift in Sources */,
+				B0000016 /* FarmingAdvisor.swift in Sources */,
+				B0000017 /* AdvisorySection.swift in Sources */,
+				B0000018 /* ForecastView.swift in Sources */,
+				B0000019 /* FarmLogView.swift in Sources */,
+				B000001A /* KnowledgeBase.swift in Sources */,
+				B000001B /* AgriBotEngine.swift in Sources */,
+				B000001C /* AgriBotView.swift in Sources */,
+				B000001D /* MarketDataService.swift in Sources */,
+				B000001E /* FarmLogEntry.swift in Sources */,
+				B000001F /* ReminderManager.swift in Sources */,
+				B0000020 /* ImagePickers.swift in Sources */,
+				B0000021 /* ImageManager.swift in Sources */,
+				B0000022 /* SettingsView.swift in Sources */,
+				B0000023 /* OnboardingView.swift in Sources */,
+				B0000024 /* ProfileCard.swift in Sources */,
+				B0000025 /* ProfileEditView.swift in Sources */,
+				B0000026 /* LocalWeatherCard.swift in Sources */,
+				B0000027 /* WeatherKitService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C0000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C0000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C0000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AgroWeather/AgroWeather.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J84L4DVVNR;
+				INFOPLIST_FILE = AgroWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreen;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C0000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AgroWeather/AgroWeather.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J84L4DVVNR;
+				INFOPLIST_FILE = AgroWeather/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LAUNCH_SCREEN_STORYBOARD = LaunchScreen;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CL0000001 /* Build configuration list for PBXProject "AgroWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0000001 /* Debug */,
+				C0000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CL0000002 /* Build configuration list for PBXNativeTarget "AgroWeather" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C0000003 /* Debug */,
+				C0000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P0000001 /* Project object */;
+}
