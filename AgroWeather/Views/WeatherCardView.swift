@@ -61,18 +61,15 @@ struct WeatherCardView: View {
     @State private var appear = false
 
     var body: some View {
-        VStack(spacing: compact ? 6 : 0) {
+        VStack(spacing: compact ? 2 : 0) {
             header
-            if compact { Spacer(minLength: 2) }
-            mainValue
-            if compact { Spacer(minLength: 2) }
+            mainValue.frame(maxHeight: .infinity, alignment: .leading)
             if !compact {
-                Spacer(minLength: 8)
                 footer
             }
         }
         .padding(compact ? 10 : 20)
-        .frame(minHeight: compact ? 110 : 200)
+        .frame(height: compact ? 130 : 200)
         .background(type.gradient)
         .premiumCard()
         .overlay(alignment: .bottomTrailing) {
@@ -163,19 +160,56 @@ struct WeatherCardView: View {
 
     @ViewBuilder
     private var mainValue: some View {
-        let valueSize: CGFloat = compact ? 26 : 52
-
         switch type {
         case .soilMoisture:
             HStack(alignment: .lastTextBaseline, spacing: 4) {
                 Text("\(viewModel.currentSoilMoisturePercent)")
-                    .font(.system(size: valueSize, weight: .bold, design: .rounded))
+                    .font(.system(size: compact ? 26 : 52, weight: .bold, design: .rounded))
                     .foregroundColor(.white)
                 Text("%")
-                    .font(.system(size: compact ? 14 : 22, weight: .medium))
+                    .font(.system(size: compact ? 13 : 22, weight: .medium))
                     .foregroundColor(.white.opacity(0.7))
                     .padding(.bottom, compact ? 2 : 4)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        case .evapotranspiration:
+            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                Text(String(format: "%.1f", viewModel.currentEvapotranspiration ?? 0))
+                    .font(.system(size: compact ? 26 : 52, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Text("mm")
+                    .font(.system(size: compact ? 13 : 22, weight: .medium))
+                    .foregroundColor(.white.opacity(0.7))
+                    .padding(.bottom, compact ? 2 : 4)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        case .soilTemperature:
+            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                Text(String(format: "%.1f", viewModel.currentSoilTemperature ?? 0))
+                    .font(.system(size: compact ? 26 : 52, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Text("°C")
+                    .font(.system(size: compact ? 13 : 22, weight: .medium))
+                    .foregroundColor(.white.opacity(0.7))
+                    .padding(.bottom, compact ? 2 : 4)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+        case .vaporPressureDeficit:
+            HStack(alignment: .lastTextBaseline, spacing: 4) {
+                Text(String(format: "%.2f", viewModel.currentVPD ?? 0))
+                    .font(.system(size: compact ? 22 : 44, weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                Text("kPa")
+                    .font(.system(size: compact ? 11 : 20, weight: .medium))
+                    .foregroundColor(.white.opacity(0.7))
+                    .padding(.bottom, compact ? 2 : 4)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
             .frame(maxWidth: .infinity, alignment: .leading)
 
         case .evapotranspiration:
