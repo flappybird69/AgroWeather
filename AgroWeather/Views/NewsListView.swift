@@ -186,14 +186,11 @@ struct NewsListView: View {
                     .background(Color(.secondarySystemGroupedBackground))
                     .clipShape(RoundedRectangle(cornerRadius: 14))
             } else {
-                VStack(spacing: 0) {
+                VStack(spacing: 10) {
                     ForEach(Array(rssItems.prefix(15))) { item in
                         rssRow(item)
-                        if item.id != rssItems.prefix(15).last?.id { Divider().padding(.leading, 16) }
                     }
                 }
-                .background(Color(.secondarySystemGroupedBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 14))
 
                 citationBar(.worldBank)
             }
@@ -202,28 +199,47 @@ struct NewsListView: View {
     }
 
     private func rssRow(_ item: RSSItem) -> some View {
-        Button {
-            guard let url = URL(string: item.link) else { return }
-            UIApplication.shared.open(url)
-        } label: {
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 6) {
-                    Text(item.source.name)
-                        .font(.system(size: 9, weight: .bold)).foregroundColor(.agroGreen)
-                        .padding(.horizontal, 6).padding(.vertical, 2)
-                        .background(Color.agroGreen.opacity(0.1)).clipShape(Capsule())
-                    if let date = item.pubDate {
-                        Text(date, style: .date).font(.caption2).foregroundColor(.secondary.opacity(0.7))
-                    }
-                    Spacer()
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Text(item.source.name)
+                    .font(.system(size: 9, weight: .bold)).foregroundColor(.agroGreen)
+                    .padding(.horizontal, 6).padding(.vertical, 2)
+                    .background(Color.agroGreen.opacity(0.1)).clipShape(Capsule())
+                if let date = item.pubDate {
+                    Text(date, style: .date).font(.caption2).foregroundColor(.secondary.opacity(0.7))
                 }
-                Text(item.title).font(.subheadline.weight(.semibold)).lineLimit(2)
-                if !item.description.isEmpty {
-                    Text(item.description).font(.caption).foregroundColor(.secondary).lineLimit(2)
+                Spacer()
+            }
+
+            Text(item.title)
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(3)
+
+            if !item.description.isEmpty {
+                Text(item.description)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineSpacing(2)
+            }
+
+            if URL(string: item.link) != nil {
+                Button {
+                    guard let url = URL(string: item.link) else { return }
+                    UIApplication.shared.open(url)
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("Διάβασε περισσότερα")
+                            .font(.caption.weight(.medium))
+                        Image(systemName: "arrow.up.forward")
+                            .font(.system(size: 8, weight: .semibold))
+                    }
+                    .foregroundColor(.agroGreen)
                 }
             }
-            .padding(12).contentShape(Rectangle())
         }
+        .padding(12)
+        .background(Color(.secondarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
     }
 
     // MARK: - Citations
@@ -278,13 +294,16 @@ struct NewsListView: View {
 
     private func loadRSS() async {
         isLoadingRSS = true; errorMessage = nil
-        do {
-            let service = RSSService.shared
-            var all: [RSSItem] = []
-            for source in RSSSource.all { all.append(contentsOf: try await service.fetchRSS(source: source)) }
-            all.sort { ($0.pubDate ?? .distantPast) > ($1.pubDate ?? .distantPast) }
-            rssItems = all
-        } catch { errorMessage = "Αδυναμία λήψης νέων" }
+        let service = RSSService.shared
+        var all: [RSSItem] = []
+        for source in RSSSource.all {
+            if let items = try? await service.fetchRSS(source: source) {
+                all.append(contentsOf: items)
+            }
+        }
+        all.sort { ($0.pubDate ?? .distantPast) > ($1.pubDate ?? .distantPast) }
+        rssItems = all
+        if all.isEmpty { errorMessage = "Αδυναμία λήψης νέων" }
         isLoadingRSS = false
     }
 

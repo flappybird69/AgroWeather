@@ -196,13 +196,28 @@ struct DataCitation {
         ),
         DataCitation(
             text: "Γεωργικά νέα: Ευρωπαϊκή Επιτροπή — DG Agriculture",
-            url: "https://ec.europa.eu/info/news/agriculture-and-rural-development_en",
-            license: "© Ευρωπαϊκή Ένωση — reuse permitted"
+            url: "https://agriculture.ec.europa.eu",
+            license: "© Ευρωπαϊκή Ένωση — reuse permitted with attribution"
         ),
         DataCitation(
             text: "Γεωργικά νέα: CAP Reform EU",
             url: "https://www.capreform.eu",
             license: "Ανοιχτή πρόσβαση"
+        ),
+        DataCitation(
+            text: "Γεωργικά νέα: AgriLand.ie — EU Farming News",
+            url: "https://www.agriland.ie",
+            license: "© AgriLand Media — RSS syndication with attribution"
+        ),
+        DataCitation(
+            text: "Γεωργικά νέα: Euractiv Agriculture & Food",
+            url: "https://www.euractiv.com/sections/agriculture-food/",
+            license: "© Euractiv — RSS syndication with attribution"
+        ),
+        DataCitation(
+            text: "Γεωργικά νέα: Farming UK",
+            url: "https://www.farminguk.com",
+            license: "© Farming UK — RSS syndication with attribution"
         ),
         DataCitation(
             text: "Χάρτες: Apple MapKit",
