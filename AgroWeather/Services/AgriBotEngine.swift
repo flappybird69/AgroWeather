@@ -29,13 +29,13 @@ actor AgriBotEngine {
 
         if overallScore >= 0.7 {
             responseText = bestRule.responseGood
-            adjustedDetail = buildDetailString(from: variables, weather: weather, positive: true)
+            adjustedDetail = buildDetailString(from: variables, weather: weather)
         } else if overallScore >= 0.35 {
             responseText = bestRule.responseNeutral
-            adjustedDetail = buildDetailString(from: variables, weather: weather, positive: false)
+            adjustedDetail = buildDetailString(from: variables, weather: weather)
         } else {
             responseText = bestRule.responseBad
-            adjustedDetail = buildDetailString(from: variables, weather: weather, positive: false)
+            adjustedDetail = buildDetailString(from: variables, weather: weather)
         }
 
         let detail = conditionsMet.isEmpty
@@ -126,13 +126,10 @@ actor AgriBotEngine {
 
     // MARK: - Formatting
 
-    private func buildDetailString(from variables: [WeatherVariable: Double], weather: WeatherData?, positive: Bool) -> String {
-        var parts: [String] = []
-        for (variable, value) in variables {
-            guard let _ = weather else { continue }
-            parts.append("• \(variableLabel(variable)): \(formatValue(variable, value))")
-        }
-        return parts.joined(separator: "\n")
+    private func buildDetailString(from variables: [WeatherVariable: Double], weather: WeatherData?) -> String {
+        guard weather != nil else { return "" }
+        return variables.map { "• \(variableLabel($0.key)): \(formatValue($0.key, $0.value))" }
+            .joined(separator: "\n")
     }
 
     private func variableLabel(_ variable: WeatherVariable) -> String {

@@ -4,15 +4,22 @@ struct NewsListView: View {
     @State private var rssItems: [RSSItem] = []
     @State private var wbPrices: [MarketPrice] = []
     @State private var ecbPrices: [MarketPrice] = []
+    @State private var ecPressItems: [ECPressItem] = []
     @State private var isLoadingRSS = true
     @State private var isLoadingPrices = true
+    @State private var isLoadingECPress = true
     @State private var errorMessage: String?
+
+    private var sortedPrices: [MarketPrice] {
+        (wbPrices + ecbPrices).sorted { $0.name < $1.name }
+    }
 
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 marketSection
                 euProgramsSection
+                ecPressSection
                 rssSection
                 citationsSection
             }
@@ -22,12 +29,14 @@ struct NewsListView: View {
         .task {
             async let rss: () = loadRSS()
             async let prices: () = loadPrices()
-            _ = await (rss, prices)
+            async let press: () = loadECPress()
+            _ = await (rss, prices, press)
         }
         .refreshable {
             async let rss: () = loadRSS()
             async let prices: () = loadPrices()
-            _ = await (rss, prices)
+            async let press: () = loadECPress()
+            _ = await (rss, prices, press)
         }
     }
 
@@ -58,9 +67,9 @@ struct NewsListView: View {
 
                     Divider()
 
-                    ForEach(Array((wbPrices + ecbPrices).sorted { $0.name < $1.name }.enumerated()), id: \.element.id) { index, price in
+                    ForEach(Array(sortedPrices.enumerated()), id: \.element.id) { index, price in
                         priceRow(price)
-                        if index < (wbPrices + ecbPrices).count - 1 {
+                        if index < sortedPrices.count - 1 {
                             Divider().padding(.leading, 16)
                         }
                     }
@@ -272,6 +281,86 @@ struct NewsListView: View {
             .clipShape(RoundedRectangle(cornerRadius: 14))
         }
         .padding(.horizontal, 16)
+    }
+
+    // MARK: - EC Press Corner
+
+    private var ecPressSection: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            sectionHeader(icon: "building.columns.fill", title: "EC ΑΝΑΚΟΙΝΩΣΕΙΣ ΓΕΩΡΓΙΑΣ")
+
+            if isLoadingECPress {
+                VStack(spacing: 8) {
+                    ProgressView()
+                    Text("Φόρτωση ανακοινώσεων...").font(.caption).foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(20)
+                .background(Color(.secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+            } else if ecPressItems.isEmpty {
+                Text("Δεν υπάρχουν διαθέσιμες ανακοινώσεις")
+                    .font(.subheadline).foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity).padding(.vertical, 30)
+                    .background(Color(.secondarySystemGroupedBackground))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+            } else {
+                VStack(spacing: 0) {
+                    ForEach(ecPressItems.prefix(12)) { item in
+                        ecPressRow(item)
+                        if item.id != ecPressItems.prefix(12).last?.id {
+                            Divider().padding(.leading, 16)
+                        }
+                    }
+                }
+                .background(Color(.secondarySystemGroupedBackground))
+                .clipShape(RoundedRectangle(cornerRadius: 14))
+
+                HStack(spacing: 6) {
+                    Image(systemName: "info.circle.fill").font(.system(size: 9)).foregroundColor(.secondary.opacity(0.5))
+                    Text("Πηγή: Ευρωπαϊκή Επιτροπή — ec.europa.eu · © EU, αναπαραγωγή με αναφορά πηγής")
+                        .font(.system(size: 8)).foregroundColor(.secondary.opacity(0.5))
+                }
+                .padding(.leading, 4)
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+
+    private func ecPressRow(_ item: ECPressItem) -> some View {
+        Button {
+            guard let url = item.articleURL else { return }
+            UIApplication.shared.open(url)
+        } label: {
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 6) {
+                    Text("EC")
+                        .font(.system(size: 9, weight: .bold)).foregroundColor(.blue)
+                        .padding(.horizontal, 6).padding(.vertical, 2)
+                        .background(Color.blue.opacity(0.1)).clipShape(Capsule())
+                    Text(item.docutype.description)
+                        .font(.system(size: 9, weight: .medium)).foregroundColor(.secondary)
+                        .padding(.horizontal, 6).padding(.vertical, 2)
+                        .background(Color(.tertiarySystemGroupedBackground)).clipShape(Capsule())
+                    if let date = item.parsedDate {
+                        Text(date, style: .date).font(.caption2).foregroundColor(.secondary.opacity(0.7))
+                    }
+                    Spacer()
+                }
+                Text(item.title).font(.subheadline.weight(.semibold)).lineLimit(2)
+                if let lead = item.leadText, !lead.isEmpty {
+                    Text(lead).font(.caption).foregroundColor(.secondary).lineLimit(2)
+                }
+            }
+            .padding(12).contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private func loadECPress() async {
+        isLoadingECPress = true
+        ecPressItems = (try? await ECPressService.shared.fetchAgricultureNews()) ?? []
+        isLoadingECPress = false
     }
 
     // MARK: - Helpers

@@ -168,6 +168,7 @@ final class WeatherViewModel {
 
     // MARK: - Weather
 
+    @MainActor
     func fetchWeather() async {
         guard let field = selectedField else { return }
 

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		520655E02FC106960079C974 /* ECPressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520655DF2FC106950079C974 /* ECPressService.swift */; };
 		B0000001 /* AgroWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000001 /* AgroWeatherApp.swift */; };
 		B0000002 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002 /* Extensions.swift */; };
 		B0000003 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000003 /* Field.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		520655DF2FC106950079C974 /* ECPressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECPressService.swift; sourceTree = "<group>"; };
 		A0000001 /* AgroWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgroWeatherApp.swift; sourceTree = "<group>"; };
 		A0000002 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A0000003 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				A0000021 /* ReminderManager.swift */,
 				A0000023 /* ImageManager.swift */,
 				A0000029 /* WeatherKitService.swift */,
+				520655DF2FC106950079C974 /* ECPressService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 				B0000001 /* AgroWeatherApp.swift in Sources */,
 				B0000002 /* Extensions.swift in Sources */,
 				B0000003 /* Field.swift in Sources */,
+				520655E02FC106960079C974 /* ECPressService.swift in Sources */,
 				B0000004 /* WeatherResponse.swift in Sources */,
 				B0000005 /* WeatherData.swift in Sources */,
 				B0000006 /* WeatherService.swift in Sources */,

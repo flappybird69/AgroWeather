@@ -16,7 +16,6 @@ struct FarmLogView: View {
                 content
             }
         }
-        .onAppear { loadEntries() }
         .task {
             loadEntries()
             await preloadImages()
@@ -237,10 +236,9 @@ struct FarmLogView: View {
         .padding(.vertical, 6)
     }
 
+    @ViewBuilder
     private func logImages(_ entry: FarmLogEntry) -> some View {
-        if entry.imageFilenames.isEmpty { return AnyView(EmptyView()) }
-
-        return AnyView(
+        if !entry.imageFilenames.isEmpty {
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 6) {
                     ForEach(entry.imageFilenames, id: \.self) { name in
@@ -255,7 +253,7 @@ struct FarmLogView: View {
                 }
                 .frame(height: 60)
             }
-        )
+        }
     }
 
     private func loadEntries() {
@@ -286,11 +284,12 @@ struct FarmLogView: View {
     }
 
     private func preloadImages() async {
-        for entry in logEntries {
-            for name in entry.imageFilenames {
-                if ImageManager.shared.cachedImage(name) == nil {
-                    _ = await ImageManager.shared.loadImage(name)
-                }
+        let names = logEntries.flatMap(\.imageFilenames).filter {
+            ImageManager.shared.cachedImage($0) == nil
+        }
+        await withTaskGroup(of: Void.self) { group in
+            for name in names {
+                group.addTask { _ = await ImageManager.shared.loadImage(name) }
             }
         }
     }

@@ -25,24 +25,26 @@ struct WeatherData {
         hourlyForecast.map(\.soilTemperature).min() ?? current.soilTemperature
     }
 
+    private var hourly24: ArraySlice<HourlyForecast> { hourlyForecast.prefix(24) }
+
     var totalDailyET0: Double {
-        hourlyForecast.prefix(24).reduce(0) { $0 + $1.evapotranspiration }
+        hourly24.reduce(0) { $0 + $1.evapotranspiration }
     }
 
     var maxTemperature: Double {
-        hourlyForecast.prefix(24).compactMap(\.temperature).max() ?? current.temperature ?? 0
+        hourly24.compactMap(\.temperature).max() ?? current.temperature ?? 0
     }
 
     var minTemperature: Double {
-        hourlyForecast.prefix(24).compactMap(\.temperature).min() ?? current.temperature ?? 0
+        hourly24.compactMap(\.temperature).min() ?? current.temperature ?? 0
     }
 
     var totalPrecipitation: Double {
-        hourlyForecast.prefix(24).compactMap(\.precipitation).reduce(0, +)
+        hourly24.compactMap(\.precipitation).reduce(0, +)
     }
 
     var maxWindSpeed: Double {
-        hourlyForecast.prefix(24).compactMap(\.windSpeed).max() ?? current.windSpeed ?? 0
+        hourly24.compactMap(\.windSpeed).max() ?? current.windSpeed ?? 0
     }
 }
 

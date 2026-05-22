@@ -200,6 +200,11 @@ struct DataCitation {
             license: "© Ευρωπαϊκή Ένωση — reuse permitted with attribution"
         ),
         DataCitation(
+            text: "EC Ανακοινώσεις: European Commission Press Corner",
+            url: "https://ec.europa.eu/commission/presscorner",
+            license: "© Ευρωπαϊκή Ένωση — reuse permitted (Decision 2011/833/EU)"
+        ),
+        DataCitation(
             text: "Γεωργικά νέα: CAP Reform EU",
             url: "https://www.capreform.eu",
             license: "Ανοιχτή πρόσβαση"

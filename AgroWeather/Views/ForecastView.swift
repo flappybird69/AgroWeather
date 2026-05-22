@@ -140,7 +140,7 @@ struct ForecastView: View {
         VStack(alignment: .leading, spacing: 10) {
             sectionHeader(icon: "list.bullet", title: "ΑΝΑΛΥΤΙΚΗ ΠΡΟΓΝΩΣΗ")
 
-            VStack(spacing: 0) {
+            LazyVStack(spacing: 0) {
                 ForEach(Array(viewModel.hourlyForecast.prefix(24).enumerated()), id: \.element.id) { index, hour in
                     hourRow(hour)
                     if index < 23 {

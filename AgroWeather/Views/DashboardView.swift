@@ -310,9 +310,4 @@ struct DashboardView: View {
         .clipShape(RoundedRectangle(cornerRadius: 10))
     }
 
-    // MARK: - News & EU Programs
-
-    private func formatLocation(_ field: Field) -> String {
-        String(format: "%.4f°N, %.4f°E", field.latitude, field.longitude)
-    }
 }
