@@ -181,20 +181,26 @@ struct DashboardView: View {
     // MARK: - Premium Cards
 
     private var premiumCards: some View {
-        LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+        VStack(spacing: 12) {
             if viewModel.isLoading && viewModel.weatherData == nil {
-                ForEach(WeatherCardType.allCases, id: \.self) { type in
-                    WeatherCardView(type: type, isLoading: true, compact: true)
-                }
+                cardRow(types: [.soilMoisture, .evapotranspiration], loading: true)
+                cardRow(types: [.soilTemperature, .vaporPressureDeficit], loading: true)
             } else if viewModel.weatherData != nil {
-                ForEach(WeatherCardType.allCases, id: \.self) { type in
-                    WeatherCardView(type: type, compact: true)
-                }
+                cardRow(types: [.soilMoisture, .evapotranspiration], loading: false)
+                cardRow(types: [.soilTemperature, .vaporPressureDeficit], loading: false)
             } else if !viewModel.isLoading {
                 errorState
-                    .gridCellColumns(2)
             }
         }
+    }
+
+    private func cardRow(types: [WeatherCardType], loading: Bool) -> some View {
+        HStack(spacing: 12) {
+            ForEach(types, id: \.self) { type in
+                WeatherCardView(type: type, isLoading: loading)
+            }
+        }
+        .frame(height: 120)
     }
 
     private var errorState: some View {
