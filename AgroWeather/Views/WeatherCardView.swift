@@ -61,17 +61,18 @@ struct WeatherCardView: View {
     @State private var appear = false
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: compact ? 6 : 0) {
             header
-            Spacer(minLength: compact ? 4 : 8)
+            if compact { Spacer(minLength: 2) }
             mainValue
+            if compact { Spacer(minLength: 2) }
             if !compact {
                 Spacer(minLength: 8)
                 footer
             }
         }
-        .padding(compact ? 12 : 20)
-        .frame(minHeight: compact ? 100 : 200)
+        .padding(compact ? 10 : 20)
+        .frame(minHeight: compact ? 110 : 200)
         .background(type.gradient)
         .premiumCard()
         .overlay(alignment: .bottomTrailing) {
@@ -162,8 +163,7 @@ struct WeatherCardView: View {
 
     @ViewBuilder
     private var mainValue: some View {
-        let valueSize: CGFloat = compact ? 28 : 52
-        let unitSize: CGFloat = compact ? 14 : 22
+        let valueSize: CGFloat = compact ? 26 : 52
 
         switch type {
         case .soilMoisture:
