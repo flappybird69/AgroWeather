@@ -123,6 +123,12 @@ struct FREDChartView: View {
                     .foregroundColor(.agroGreen)
                 }
 
+                Text("Με ένα δωρεάν API key από το FRED (Federal Reserve Bank of St. Louis) θα έχετε πρόσβαση σε 19 παγκόσμιες τιμές εμπορευμάτων: σιτάρι, καλαμπόκι, ρύζι, σόγια, ζάχαρη, καφές, κακάο, βαμβάκι, ελαιόλαδο, ηλιέλαιο, φοινικέλαιο, πορτοκάλια, μπανάνες, βοδινό, κοτόπουλο, ψάρια, ξυλεία, καουτσούκ και ηλιέλαιο. Όλα τα δεδομένα ανανεώνονται αυτόματα κάθε 24 ώρες χωρίς χρέωση.")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+                    .lineSpacing(3)
+                    .padding(.top, 2)
+
                 if !userApiKey.isEmpty {
                     Button {
                         Task { await refreshData() }
