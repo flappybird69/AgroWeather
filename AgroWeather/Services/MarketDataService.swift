@@ -7,23 +7,27 @@ actor MarketDataService {
     private let cacheDuration: TimeInterval = 86400 // 24 hours
 
     // FRED API — Federal Reserve Economic Data
-    // Απόκτησε δωρεάν API key: https://fred.stlouisfed.org/docs/api/api_key.html
-    // Βάλτο στο Config.plist στο κλειδί FRED_API_KEY
-    private let fredKey: String = {
+    // Ο χρήστης μπορεί να βάλει το δικό του API key στο Config.plist ή στο Settings
+    // Δωρεάν API key: https://fred.stlouisfed.org/docs/api/api_key.html
+    private var fredKey: String {
+        // Πρώτα έλεγξε αν ο χρήστης έχει βάλει key από την εφαρμογή
+        if let userKey = defaults.string(forKey: "user_fred_api_key"), !userKey.isEmpty {
+            return userKey
+        }
+        // Αλλιώς διάβασε από Config.plist
         if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
            let dict = NSDictionary(contentsOfFile: path),
            let key = dict["FRED_API_KEY"] as? String, !key.isEmpty {
             return key
         }
         return ""
-    }()
+    }
     private let fredBase = "https://api.stlouisfed.org/fred/series/observations"
 
     // ECB Statistical Data Warehouse API
     private let ecbBase = "https://data-api.ecb.europa.eu/service/data"
 
     func fetchCommodityPrices() async throws -> [MarketPrice] {
-        // Check cache first
         if let cached = loadCachedPrices() { return cached }
 
         let series: [(String, String, String)] = [
