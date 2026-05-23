@@ -68,6 +68,31 @@ actor MarketDataService {
         return MarketPrice(name: name, code: id, value: value, date: date, unit: unit, source: .fred)
     }
 
+    func fetchHistoricalData(seriesId: String) async throws -> [FREDHistoricalPoint] {
+        let url = "\(fredBase)?series_id=\(seriesId)&api_key=\(fredKey)&file_type=json&sort_order=desc&limit=120"
+        guard let parsedURL = URL(string: url) else { return [] }
+        var request = URLRequest(url: parsedURL)
+        request.timeoutInterval = 10
+
+        let (data, _) = try await URLSession.shared.data(for: request)
+        guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let obs = json["observations"] as? [[String: Any]] else { return [] }
+
+        var points: [FREDHistoricalPoint] = []
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+
+        for entry in obs {
+            guard let valueStr = entry["value"] as? String,
+                  valueStr != ".",
+                  let value = Double(valueStr),
+                  let dateStr = entry["date"] as? String,
+                  let date = f.date(from: dateStr) else { continue }
+            points.append(FREDHistoricalPoint(date: date, value: value))
+        }
+        return points.sorted { $0.date < $1.date }
+    }
+
     func fetchECBData() async throws -> [MarketPrice] {
         let series = [
             ("AP.M.U2.N.T000.4.A", "Γενικός Δείκτης Γεωργίας (ΕΕ)"),
@@ -114,6 +139,12 @@ struct MarketPrice: Identifiable {
         if value > 1 { return String(format: "%.1f", value) }
         return String(format: "%.2f", value)
     }
+}
+
+struct FREDHistoricalPoint: Identifiable {
+    let id = UUID()
+    let date: Date
+    let value: Double
 }
 
 enum MarketDataSource: String {

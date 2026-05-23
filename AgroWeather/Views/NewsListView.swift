@@ -77,6 +77,20 @@ struct NewsListView: View {
 
                 citationBar(.fred)
                 citationBar(.ecb)
+
+                NavigationLink {
+                    FREDChartView()
+                } label: {
+                    HStack(spacing: 4) {
+                        Text("Περισσότερα διαγράμματα")
+                            .font(.caption.weight(.medium))
+                        Image(systemName: "chevron.right")
+                            .font(.caption2.weight(.semibold))
+                    }
+                    .foregroundColor(.agroGreen)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                }
             }
         }
         .padding(.horizontal, 16)
