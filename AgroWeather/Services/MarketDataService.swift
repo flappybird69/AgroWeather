@@ -2,6 +2,9 @@ import Foundation
 
 actor MarketDataService {
     static let shared = MarketDataService()
+    private let defaults = UserDefaults.standard
+    private let cachePrefix = "fred_cache_"
+    private let cacheDuration: TimeInterval = 86400 // 24 hours
 
     // FRED API — Federal Reserve Economic Data
     // Δωρεάν API key από fred.stlouisfed.org. Citation: "Source: FRED, Federal Reserve Bank of St. Louis"
@@ -12,8 +15,9 @@ actor MarketDataService {
     private let ecbBase = "https://data-api.ecb.europa.eu/service/data"
 
     func fetchCommodityPrices() async throws -> [MarketPrice] {
-        // FRED series IDs for agricultural commodities
-        // https://fred.stlouisfed.org/
+        // Check cache first
+        if let cached = loadCachedPrices() { return cached }
+
         let series: [(String, String, String)] = [
             ("PWHEAMTUSDM", "Σιτάρι", "$/μετρ. τόνο"),
             ("PCORNUSDM", "Καλαμπόκι", "$/μετρ. τόνο"),
@@ -47,10 +51,15 @@ actor MarketDataService {
                 if let p = result { prices.append(p) }
             }
         }
+        saveCachedPrices(prices)
         return prices
     }
 
     private func fetchSingleCommodity(id: String, name: String, unit: String) async -> MarketPrice? {
+        // Check per-commodity cache
+        let cacheKey = cachePrefix + id
+        if let cached = loadCachedCommodity(key: cacheKey) { return cached }
+
         let url = "\(fredBase)?series_id=\(id)&api_key=\(fredKey)&file_type=json&sort_order=desc&limit=2"
         guard let parsedURL = URL(string: url) else { return nil }
         var request = URLRequest(url: parsedURL)
@@ -65,7 +74,35 @@ actor MarketDataService {
               let value = Double(valueStr),
               let date = latest["date"] as? String else { return nil }
 
-        return MarketPrice(name: name, code: id, value: value, date: date, unit: unit, source: .fred)
+        let price = MarketPrice(name: name, code: id, value: value, date: date, unit: unit, source: .fred)
+        saveCachedCommodity(price, key: cacheKey)
+        return price
+    }
+
+    // MARK: - 24h Cache
+
+    private func loadCachedPrices() -> [MarketPrice]? {
+        guard let data = defaults.data(forKey: cachePrefix + "all"),
+              let cached = try? JSONDecoder().decode(CachedPrices.self, from: data),
+              Date().timeIntervalSince(cached.timestamp) < cacheDuration else { return nil }
+        return cached.prices
+    }
+
+    private func saveCachedPrices(_ prices: [MarketPrice]) {
+        guard let data = try? JSONEncoder().encode(CachedPrices(prices: prices, timestamp: Date())) else { return }
+        defaults.set(data, forKey: cachePrefix + "all")
+    }
+
+    private func loadCachedCommodity(key: String) -> MarketPrice? {
+        guard let data = defaults.data(forKey: key),
+              let cached = try? JSONDecoder().decode(CachedPrice.self, from: data),
+              Date().timeIntervalSince(cached.timestamp) < cacheDuration else { return nil }
+        return cached.price
+    }
+
+    private func saveCachedCommodity(_ price: MarketPrice, key: String) {
+        guard let data = try? JSONEncoder().encode(CachedPrice(price: price, timestamp: Date())) else { return }
+        defaults.set(data, forKey: key)
     }
 
     func fetchHistoricalData(seriesId: String) async throws -> [FREDHistoricalPoint] {
@@ -147,21 +184,17 @@ struct FREDHistoricalPoint: Identifiable {
     let value: Double
 }
 
-enum MarketDataSource: String {
-    case fred = "FRED"
-    case ecb = "Ευρωπαϊκή Κεντρική Τράπεζα"
-    case worldBank = "Παγκόσμια Τράπεζα"
+// MARK: - Cache Models
 
-    var citation: String {
-        switch self {
-        case .fred: return "Πηγή: FRED, Federal Reserve Bank of St. Louis — fred.stlouisfed.org • Open access"
-        case .ecb: return "Πηγή: Ευρωπαϊκή Κεντρική Τράπεζα (ECB SDW) — ecb.europa.eu • Αναπαραγωγή με αναφορά πηγής"
-        case .worldBank: return "Πηγή: Παγκόσμια Τράπεζα — worldbank.org • CC BY 4.0"
-        }
-    }
+struct CachedPrices: Codable {
+    let prices: [MarketPrice]
+    let timestamp: Date
 }
 
-// MARK: - Citations
+struct CachedPrice: Codable {
+    let price: MarketPrice
+    let timestamp: Date
+}
 
 struct DataCitation {
     let text: String
