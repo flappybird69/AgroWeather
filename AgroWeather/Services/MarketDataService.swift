@@ -7,8 +7,16 @@ actor MarketDataService {
     private let cacheDuration: TimeInterval = 86400 // 24 hours
 
     // FRED API — Federal Reserve Economic Data
-    // Δωρεάν API key από fred.stlouisfed.org. Citation: "Source: FRED, Federal Reserve Bank of St. Louis"
-    private let fredKey = "41773c3d0d3e8f81a5ec8ff56cffc0af"
+    // Απόκτησε δωρεάν API key: https://fred.stlouisfed.org/docs/api/api_key.html
+    // Βάλτο στο Config.plist στο κλειδί FRED_API_KEY
+    private let fredKey: String = {
+        if let path = Bundle.main.path(forResource: "Config", ofType: "plist"),
+           let dict = NSDictionary(contentsOfFile: path),
+           let key = dict["FRED_API_KEY"] as? String, !key.isEmpty {
+            return key
+        }
+        return ""
+    }()
     private let fredBase = "https://api.stlouisfed.org/fred/series/observations"
 
     // ECB Statistical Data Warehouse API
