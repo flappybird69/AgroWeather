@@ -55,8 +55,33 @@ struct ContentView: View {
 
             NavigationStack {
                 AgriBotView()
-                    .navigationTitle("Κύριος Στάθης")
-                    .navigationBarTitleDisplayMode(.large)
+                    .navigationTitle("")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            VStack(spacing: 2) {
+                                ZStack {
+                                    Circle()
+                                        .fill(Color.agroGreen.opacity(0.12))
+                                        .frame(width: 40, height: 40)
+
+                                    Image(systemName: "person.fill")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(.agroGreen)
+                                        .offset(y: -2)
+
+                                    Image(systemName: "leaf.fill")
+                                        .font(.system(size: 9))
+                                        .foregroundColor(.green)
+                                        .offset(x: 8, y: 8)
+                                }
+
+                                Text("Κύριος Στάθης")
+                                    .font(.title3.weight(.bold))
+                                    .foregroundColor(.primary)
+                            }
+                        }
+                    }
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Κύριος Στάθης", systemImage: "leaf.arrow.triangle.circlepath") }
