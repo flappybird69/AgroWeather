@@ -37,24 +37,35 @@ actor MarketDataService {
         ]
 
         var prices: [MarketPrice] = []
-        for (id, name, unit) in series {
-            let url = "\(fredBase)?series_id=\(id)&api_key=\(fredKey)&file_type=json&sort_order=desc&limit=2"
-            guard let parsedURL = URL(string: url) else { continue }
-            var request = URLRequest(url: parsedURL)
-            request.timeoutInterval = 10
-
-            guard let (data, _) = try? await URLSession.shared.data(for: request) else { continue }
-            guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
-                  let obs = json["observations"] as? [[String: Any]],
-                  let latest = obs.first,
-                  let valueStr = latest["value"] as? String,
-                  valueStr != ".",
-                  let value = Double(valueStr),
-                  let date = latest["date"] as? String else { continue }
-
-            prices.append(MarketPrice(name: name, code: id, value: value, date: date, unit: unit, source: .fred))
+        try await withThrowingTaskGroup(of: MarketPrice?.self) { group in
+            for (id, name, unit) in series {
+                group.addTask {
+                    return await self.fetchSingleCommodity(id: id, name: name, unit: unit)
+                }
+            }
+            for try await result in group {
+                if let p = result { prices.append(p) }
+            }
         }
         return prices
+    }
+
+    private func fetchSingleCommodity(id: String, name: String, unit: String) async -> MarketPrice? {
+        let url = "\(fredBase)?series_id=\(id)&api_key=\(fredKey)&file_type=json&sort_order=desc&limit=2"
+        guard let parsedURL = URL(string: url) else { return nil }
+        var request = URLRequest(url: parsedURL)
+        request.timeoutInterval = 8
+
+        guard let (data, _) = try? await URLSession.shared.data(for: request) else { return nil }
+        guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let obs = json["observations"] as? [[String: Any]],
+              let latest = obs.first,
+              let valueStr = latest["value"] as? String,
+              valueStr != ".",
+              let value = Double(valueStr),
+              let date = latest["date"] as? String else { return nil }
+
+        return MarketPrice(name: name, code: id, value: value, date: date, unit: unit, source: .fred)
     }
 
     func fetchECBData() async throws -> [MarketPrice] {
