@@ -378,6 +378,7 @@ struct AddLogEntryView: View {
     @State private var equipmentHours: Int? = nil
     @State private var equipmentNotes = ""
     let onSave: (FarmLogEntry) -> Void
+    @FocusState private var focusedField: String?
 
     var body: some View {
         NavigationStack {
@@ -393,14 +394,12 @@ struct AddLogEntryView: View {
             .navigationTitle("Νέα Καταγραφή")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Ακύρωση") { dismiss() }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Αποθήκευση") {
-                        Task { await save() }
-                    }
-                        .fontWeight(.semibold)
+                ToolbarItem(placement: .navigationBarLeading) { Button("Ακύρωση") { dismiss() } }
+                ToolbarItem(placement: .navigationBarTrailing) { Button("Αποθήκευση") { Task { await save() } }.fontWeight(.semibold) }
+                ToolbarItem(placement: .keyboard) {
+                    Button("Τέλος") { focusedField = nil }
+                        .fontWeight(.medium)
+                        .foregroundColor(.agroGreen)
                 }
             }
             .onChange(of: selectedType) { _, _ in resetFields() }
