@@ -114,6 +114,16 @@ struct SettingsView: View {
                         .font(.caption2)
                         .foregroundColor(.secondary.opacity(0.6))
                         .padding(.top, 4)
+
+                    HStack(spacing: 12) {
+                        Button { openURL("https://doc-hosting.flycricket.io/agroweatherpro-privacy-policy/50e0b302-6153-4d83-a8bd-391d0aaeb2f8/privacy") } label: {
+                            Text("Πολιτική Απορρήτου").font(.caption.weight(.medium)).foregroundColor(.agroGreen)
+                        }
+                        Button { openURL("https://doc-hosting.flycricket.io/agroweatherpro-terms-of-use/a377387f-9afd-4b71-8b26-700af0272355/terms") } label: {
+                            Text("Όροι Χρήσης").font(.caption.weight(.medium)).foregroundColor(.agroGreen)
+                        }
+                    }
+                    .padding(.top, 8)
                 }
                 .padding(.vertical, 4)
             } header: {
@@ -122,5 +132,10 @@ struct SettingsView: View {
         }
         .navigationTitle("Ρυθμίσεις")
         .navigationBarTitleDisplayMode(.inline)
+    }
+
+    private func openURL(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        UIApplication.shared.open(url)
     }
 }
