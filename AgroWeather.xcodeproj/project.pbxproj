@@ -48,6 +48,7 @@
 		B0000027 /* WeatherKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000029 /* WeatherKitService.swift */; };
 		B0000028 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A0000030 /* PrivacyInfo.xcprivacy */; };
 		B0000029 /* FREDChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000031 /* FREDChartView.swift */; };
+		B0000030 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000032 /* ChatBubble.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -110,6 +111,7 @@
 		A0000029 /* WeatherKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitService.swift; sourceTree = "<group>"; };
 		A0000030 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A0000031 /* FREDChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FREDChartView.swift; sourceTree = "<group>"; };
+		A0000032 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -224,6 +226,7 @@
 				A0000027 /* ProfileEditView.swift */,
 				A0000028 /* LocalWeatherCard.swift */,
 				A0000031 /* FREDChartView.swift */,
+				A0000032 /* ChatBubble.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				B0000026 /* LocalWeatherCard.swift in Sources */,
 				B0000027 /* WeatherKitService.swift in Sources */,
 				B0000029 /* FREDChartView.swift in Sources */,
+				B0000030 /* ChatBubble.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,20 +15,11 @@ struct ContentView: View {
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             HStack(spacing: 4) {
-                                Button {
-                                    showSettings = true
-                                } label: {
-                                    Image(systemName: "gearshape.fill")
-                                        .font(.title3)
-                                        .foregroundColor(.secondary)
+                                Button { showSettings = true } label: {
+                                    Image(systemName: "gearshape.fill").font(.title3).foregroundColor(.secondary)
                                 }
-                                Button {
-                                    showAddField = true
-                                } label: {
-                                    Image(systemName: "plus.circle.fill")
-                                        .font(.title3)
-                                        .foregroundColor(.agroGreen)
-                                        .symbolRenderingMode(.hierarchical)
+                                Button { showAddField = true } label: {
+                                    Image(systemName: "plus.circle.fill").font(.title3).foregroundColor(.agroGreen).symbolRenderingMode(.hierarchical)
                                 }
                             }
                         }
@@ -54,37 +45,12 @@ struct ContentView: View {
             .tabItem { Label("Ημερολόγιο", systemImage: "book.fill") }
 
             NavigationStack {
-                AgriBotView()
-                    .navigationTitle("")
-                    .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            VStack(spacing: 2) {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.agroGreen.opacity(0.12))
-                                        .frame(width: 40, height: 40)
-
-                                    Image(systemName: "person.fill")
-                                        .font(.system(size: 16))
-                                        .foregroundColor(.agroGreen)
-                                        .offset(y: -2)
-
-                                    Image(systemName: "leaf.fill")
-                                        .font(.system(size: 9))
-                                        .foregroundColor(.green)
-                                        .offset(x: 8, y: 8)
-                                }
-
-                                Text("Κύριος Στάθης")
-                                    .font(.title3.weight(.bold))
-                                    .foregroundColor(.primary)
-                            }
-                        }
-                    }
+                FREDChartView()
+                    .navigationTitle("Αγορές")
+                    .navigationBarTitleDisplayMode(.large)
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
-            .tabItem { Label("Κύριος Στάθης", systemImage: "leaf.arrow.triangle.circlepath") }
+            .tabItem { Label("Αγορές", systemImage: "chart.bar.fill") }
 
             NavigationStack {
                 NewsListView()
@@ -95,15 +61,7 @@ struct ContentView: View {
             .tabItem { Label("Νέα", systemImage: "newspaper.fill") }
         }
         .tint(.agroGreen)
-        .sheet(isPresented: $showAddField) {
-            AddFieldView()
-                .preferredColorScheme(appearanceMode.colorScheme)
-        }
-        .sheet(isPresented: $showSettings) {
-            NavigationStack {
-                SettingsView()
-            }
-            .preferredColorScheme(appearanceMode.colorScheme)
-        }
+        .sheet(isPresented: $showAddField) { AddFieldView().preferredColorScheme(appearanceMode.colorScheme) }
+        .sheet(isPresented: $showSettings) { NavigationStack { SettingsView() }.preferredColorScheme(appearanceMode.colorScheme) }
     }
 }

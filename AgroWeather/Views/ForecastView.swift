@@ -46,10 +46,14 @@ struct ForecastView: View {
                 dailyOverview
                 hourlyList
             }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 16)
+            .padding(16)
         }
         .background(Color(.systemGroupedBackground))
+        .safeAreaInset(edge: .top, spacing: 0) {
+            HStack { Spacer(); ChatBubble(); Spacer() }
+                .padding(.top, 4).padding(.bottom, 4)
+                .background(Color(.systemGroupedBackground))
+        }
     }
 
     // MARK: - Next Hours
