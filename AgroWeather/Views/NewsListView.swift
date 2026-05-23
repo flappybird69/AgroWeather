@@ -77,7 +77,7 @@ struct NewsListView: View {
                 .background(Color(.secondarySystemGroupedBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 14))
 
-                citationBar(.worldBank)
+                citationBar(.fred)
                 citationBar(.ecb)
             }
         }
@@ -201,7 +201,7 @@ struct NewsListView: View {
                     }
                 }
 
-                citationBar(.worldBank)
+                citationBar(.fred)
             }
         }
         .padding(.horizontal, 16)
@@ -399,10 +399,10 @@ struct NewsListView: View {
     private func loadPrices() async {
         isLoadingPrices = true
         do {
-            async let wb = MarketDataService.shared.fetchWorldBankPrices()
+            async let fred = MarketDataService.shared.fetchCommodityPrices()
             async let ecb = MarketDataService.shared.fetchECBData()
-            let (w, e) = try await (wb, ecb)
-            wbPrices = w.sorted { $0.name < $1.name }
+            let (f, e) = try await (fred, ecb)
+            wbPrices = f.sorted { $0.name < $1.name }
             ecbPrices = e.sorted { $0.name < $1.name }
         } catch {}
         isLoadingPrices = false

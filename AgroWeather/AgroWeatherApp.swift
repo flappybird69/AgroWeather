@@ -9,8 +9,7 @@ struct AgroWeatherApp: App {
         WindowGroup {
             SplashScreen()
                 .environment(viewModel)
-                .preferredColorScheme(appearanceMode == .system ? nil :
-                                        appearanceMode == .dark ? .dark : .light)
+                .preferredColorScheme(appearanceMode.colorScheme)
         }
     }
 }

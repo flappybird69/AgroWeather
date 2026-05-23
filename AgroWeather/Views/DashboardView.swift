@@ -7,6 +7,7 @@ struct DashboardView: View {
     @State private var showFieldManagement = false
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @AppStorage("appearance_mode") private var appearanceMode: AppearanceMode = .system
 
     var body: some View {
         Group {
@@ -18,16 +19,19 @@ struct DashboardView: View {
         }
         .sheet(isPresented: $showAddField) {
             AddFieldView()
+                .preferredColorScheme(appearanceMode.colorScheme)
         }
         .sheet(isPresented: $showSettings) {
             NavigationStack {
                 ProfileEditView()
             }
+            .preferredColorScheme(appearanceMode.colorScheme)
         }
         .sheet(isPresented: $showFieldManagement) {
             NavigationStack {
                 FieldManagementView()
             }
+            .preferredColorScheme(appearanceMode.colorScheme)
         }
         .alert("Σφάλμα", isPresented: $showAlert) {
             Button("OK", role: .cancel) { viewModel.showError = false }

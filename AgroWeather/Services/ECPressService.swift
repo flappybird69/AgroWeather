@@ -6,7 +6,7 @@ actor ECPressService {
     private let base = "https://ec.europa.eu/commission/presscorner/api/search"
 
     func fetchAgricultureNews(limit: Int = 20) async throws -> [ECPressItem] {
-        var components = URLComponents(string: base)!
+        guard var components = URLComponents(string: base) else { throw ECPressError.invalidURL }
         components.queryItems = [
             URLQueryItem(name: "query", value: "agriculture"),
             URLQueryItem(name: "pagesize", value: "\(limit)"),

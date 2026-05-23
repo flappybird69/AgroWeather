@@ -12,6 +12,14 @@ enum AppearanceMode: String, CaseIterable, Codable {
         case .dark: return "moon.fill"
         }
     }
+
+    var colorScheme: ColorScheme? {
+        switch self {
+        case .system: return nil
+        case .light: return .light
+        case .dark: return .dark
+        }
+    }
 }
 
 struct SettingsView: View {
@@ -132,6 +140,7 @@ struct SettingsView: View {
         }
         .navigationTitle("Ρυθμίσεις")
         .navigationBarTitleDisplayMode(.inline)
+        .preferredColorScheme(appearanceMode.colorScheme)
     }
 
     private func openURL(_ url: String) {

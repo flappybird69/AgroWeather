@@ -74,7 +74,7 @@ struct ForecastView: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(.secondary)
 
-            Image(systemName: hour.temperature.map { $0 > 20 ? "sun.max.fill" : $0 > 10 ? "cloud.sun.fill" : "cloud.fill" } ?? "cloud.fill")
+            Image(systemName: temperatureIcon(for: hour.temperature))
                 .font(.title3)
                 .foregroundColor(.agroGreen)
 
@@ -160,7 +160,7 @@ struct ForecastView: View {
                 .foregroundColor(.secondary)
                 .frame(width: 44, alignment: .leading)
 
-            Image(systemName: hour.temperature.map { $0 > 20 ? "sun.max.fill" : $0 > 10 ? "cloud.sun.fill" : "cloud.fill" } ?? "cloud.fill")
+            Image(systemName: temperatureIcon(for: hour.temperature))
                 .font(.subheadline)
                 .foregroundColor(.agroGreen)
                 .frame(width: 20)
@@ -214,6 +214,11 @@ struct ForecastView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
+    }
+
+    private func temperatureIcon(for temperature: Double?) -> String {
+        guard let t = temperature else { return "cloud.fill" }
+        return t > 20 ? "sun.max.fill" : t > 10 ? "cloud.sun.fill" : "cloud.fill"
     }
 
     private func sectionHeader(icon: String, title: String) -> some View {

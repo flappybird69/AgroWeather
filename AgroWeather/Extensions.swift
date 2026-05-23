@@ -32,23 +32,9 @@ extension LinearGradient {
     )
 }
 
-extension View {
-    func premiumCard() -> some View {
-        self
-            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-            .shadow(color: .black.opacity(0.15), radius: 16, y: 6)
-    }
-}
-
 extension Double {
     func formattedTemperature() -> String {
         String(format: "%.1f°C", self)
-    }
-    func formattedET0() -> String {
-        String(format: "%.1f mm", self)
-    }
-    func formattedVPD() -> String {
-        String(format: "%.2f kPa", self)
     }
 }
 

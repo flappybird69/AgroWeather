@@ -1,10 +1,3 @@
-//
-//  AgroWeatherWidgetBundle.swift
-//  AgroWeatherWidget
-//
-//  Created by John on 23/5/26.
-//
-
 import WidgetKit
 import SwiftUI
 
@@ -12,6 +5,5 @@ import SwiftUI
 struct AgroWeatherWidgetBundle: WidgetBundle {
     var body: some Widget {
         AgroWeatherWidget()
-        AgroWeatherWidgetControl()
     }
 }

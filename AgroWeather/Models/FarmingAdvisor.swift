@@ -19,7 +19,7 @@ struct FarmingAdvisor {
         else if sprayingAdvice == .avoid { bad += 1 }
 
         if frostRisk != .none { bad += 1 }
-        else if frostRisk == .none { good += 1 }
+        else { good += 1 }
 
         if vpdRisk == .extreme || vpdRisk == .high { bad += 1 }
         else { good += 1 }

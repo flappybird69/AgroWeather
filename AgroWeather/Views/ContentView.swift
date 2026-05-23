@@ -97,11 +97,13 @@ struct ContentView: View {
         .tint(.agroGreen)
         .sheet(isPresented: $showAddField) {
             AddFieldView()
+                .preferredColorScheme(appearanceMode.colorScheme)
         }
         .sheet(isPresented: $showSettings) {
             NavigationStack {
                 SettingsView()
             }
+            .preferredColorScheme(appearanceMode.colorScheme)
         }
     }
 }
