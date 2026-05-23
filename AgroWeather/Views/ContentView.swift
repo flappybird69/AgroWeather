@@ -2,12 +2,13 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(WeatherViewModel.self) private var viewModel
+    @State private var selectedTab = 0
     @State private var showAddField = false
     @State private var showSettings = false
     @AppStorage("appearance_mode") private var appearanceMode: AppearanceMode = .system
 
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationStack {
                 DashboardView()
                     .navigationTitle(viewModel.selectedField?.name ?? "AgroWeather")
@@ -27,6 +28,7 @@ struct ContentView: View {
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Κεντρική", systemImage: "house.fill") }
+            .tag(0)
 
             NavigationStack {
                 ForecastView()
@@ -35,6 +37,7 @@ struct ContentView: View {
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Πρόγνωση", systemImage: "chart.line.uptrend.xyaxis") }
+            .tag(1)
 
             NavigationStack {
                 FarmLogView()
@@ -43,14 +46,17 @@ struct ContentView: View {
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Ημερολόγιο", systemImage: "book.fill") }
+            .tag(2)
 
             NavigationStack {
                 FREDChartView()
+                    .id(selectedTab == 3)
                     .navigationTitle("Αγορές")
                     .navigationBarTitleDisplayMode(.large)
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Αγορές", systemImage: "chart.bar.fill") }
+            .tag(3)
 
             NavigationStack {
                 NewsListView()
@@ -59,6 +65,7 @@ struct ContentView: View {
                     .toolbarBackground(.hidden, for: .navigationBar)
             }
             .tabItem { Label("Νέα", systemImage: "newspaper.fill") }
+            .tag(4)
         }
         .tint(.agroGreen)
         .sheet(isPresented: $showAddField) { AddFieldView().preferredColorScheme(appearanceMode.colorScheme) }
