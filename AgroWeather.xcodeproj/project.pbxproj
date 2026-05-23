@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		520655E02FC106960079C974 /* ECPressService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 520655DF2FC106950079C974 /* ECPressService.swift */; };
+		52E63C942FC21C08006D010D /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E63C932FC21C08006D010D /* WidgetKit.framework */; };
+		52E63C962FC21C08006D010D /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E63C952FC21C08006D010D /* SwiftUI.framework */; };
+		52E63CA32FC21C09006D010D /* AgroWeatherWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 52E63C912FC21C08006D010D /* AgroWeatherWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B0000001 /* AgroWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000001 /* AgroWeatherApp.swift */; };
 		B0000002 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000002 /* Extensions.swift */; };
 		B0000003 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000003 /* Field.swift */; };
@@ -49,8 +52,36 @@
 		B0000028 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A0000030 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		52E63CA12FC21C09006D010D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P0000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52E63C902FC21C08006D010D;
+			remoteInfo = AgroWeatherWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		52E63CA42FC21C09006D010D /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				52E63CA32FC21C09006D010D /* AgroWeatherWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		520655DF2FC106950079C974 /* ECPressService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ECPressService.swift; sourceTree = "<group>"; };
+		52E63C912FC21C08006D010D /* AgroWeatherWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = AgroWeatherWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		52E63C932FC21C08006D010D /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		52E63C952FC21C08006D010D /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		52E63CA92FC21C52006D010D /* AgroWeatherWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AgroWeatherWidgetExtension.entitlements; sourceTree = "<group>"; };
 		A0000001 /* AgroWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgroWeatherApp.swift; sourceTree = "<group>"; };
 		A0000002 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A0000003 /* Field.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
@@ -95,7 +126,30 @@
 		A0000030 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		52E63CA72FC21C09006D010D /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 52E63C902FC21C08006D010D /* AgroWeatherWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		52E63C972FC21C08006D010D /* AgroWeatherWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (52E63CA72FC21C09006D010D /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = AgroWeatherWidget; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		52E63C8E2FC21C08006D010D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52E63C962FC21C08006D010D /* SwiftUI.framework in Frameworks */,
+				52E63C942FC21C08006D010D /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F0000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -106,10 +160,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52E63C922FC21C08006D010D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52E63C932FC21C08006D010D /* WidgetKit.framework */,
+				52E63C952FC21C08006D010D /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		G0000001 = {
 			isa = PBXGroup;
 			children = (
+				52E63CA92FC21C52006D010D /* AgroWeatherWidgetExtension.entitlements */,
 				G0000002 /* AgroWeather */,
+				52E63C972FC21C08006D010D /* AgroWeatherWidget */,
+				52E63C922FC21C08006D010D /* Frameworks */,
 				G0000007 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -199,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				A000000F /* AgroWeather.app */,
+				52E63C912FC21C08006D010D /* AgroWeatherWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -206,6 +273,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52E63C902FC21C08006D010D /* AgroWeatherWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52E63CA82FC21C09006D010D /* Build configuration list for PBXNativeTarget "AgroWeatherWidgetExtension" */;
+			buildPhases = (
+				52E63C8D2FC21C08006D010D /* Sources */,
+				52E63C8E2FC21C08006D010D /* Frameworks */,
+				52E63C8F2FC21C08006D010D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				52E63C972FC21C08006D010D /* AgroWeatherWidget */,
+			);
+			name = AgroWeatherWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = AgroWeatherWidgetExtension;
+			productReference = 52E63C912FC21C08006D010D /* AgroWeatherWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		T0000001 /* AgroWeather */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CL0000002 /* Build configuration list for PBXNativeTarget "AgroWeather" */;
@@ -213,10 +302,12 @@
 				S0000001 /* Sources */,
 				F0000001 /* Frameworks */,
 				R0000001 /* Resources */,
+				52E63CA42FC21C09006D010D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				52E63CA22FC21C09006D010D /* PBXTargetDependency */,
 			);
 			name = AgroWeather;
 			productName = AgroWeather;
@@ -230,9 +321,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
+					52E63C902FC21C08006D010D = {
+						CreatedOnToolsVersion = 26.5;
+					};
 					T0000001 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -254,11 +348,19 @@
 			projectRoot = "";
 			targets = (
 				T0000001 /* AgroWeather */,
+				52E63C902FC21C08006D010D /* AgroWeatherWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		52E63C8F2FC21C08006D010D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		R0000001 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -271,6 +373,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		52E63C8D2FC21C08006D010D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		S0000001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,7 +427,81 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		52E63CA22FC21C09006D010D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52E63C902FC21C08006D010D /* AgroWeatherWidgetExtension */;
+			targetProxy = 52E63CA12FC21C09006D010D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		52E63CA52FC21C09006D010D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AgroWeatherWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J84L4DVVNR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AgroWeatherWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AgroWeatherWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app.AgroWeatherWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		52E63CA62FC21C09006D010D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = AgroWeatherWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = J84L4DVVNR;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AgroWeatherWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = AgroWeatherWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app.AgroWeatherWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		C0000001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -485,6 +668,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		52E63CA82FC21C09006D010D /* Build configuration list for PBXNativeTarget "AgroWeatherWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52E63CA52FC21C09006D010D /* Debug */,
+				52E63CA62FC21C09006D010D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CL0000001 /* Build configuration list for PBXProject "AgroWeather" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -29,40 +29,22 @@ struct AgroWeatherWidgetEntryView: View {
     var entry: SimpleEntry
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 4) {
-                Image(systemName: "tree.fill")
-                    .font(.caption)
-                    .foregroundColor(.green)
-                Text("AgroWeather")
-                    .font(.caption.weight(.semibold))
-                    .foregroundColor(.green)
+                Image(systemName: "tree.fill").font(.caption2).foregroundColor(.green)
+                Text("AgroWeather").font(.caption2.weight(.semibold)).foregroundColor(.green)
             }
-
             Spacer()
-
             HStack(alignment: .firstTextBaseline, spacing: 2) {
-                Text("\(entry.soilMoisture)")
-                    .font(.system(size: 32, weight: .bold, design: .rounded))
-                Text("%")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                Text("\(entry.soilMoisture)").font(.system(size: 34, weight: .bold, design: .rounded))
+                Text("%").font(.caption).foregroundColor(.secondary)
             }
-
             HStack(alignment: .firstTextBaseline, spacing: 2) {
-                Text(String(format: "%.1f", entry.soilTemperature))
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-                Text("°C")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                Text(String(format: "%.1f", entry.soilTemperature)).font(.system(size: 20, weight: .semibold, design: .rounded))
+                Text("°C").font(.caption).foregroundColor(.secondary)
             }
-
             Spacer()
-
-            Text(entry.fieldName)
-                .font(.caption2)
-                .foregroundColor(.secondary)
-                .lineLimit(1)
+            Text(entry.fieldName).font(.caption2).foregroundColor(.secondary).lineLimit(1)
         }
         .padding(12)
         .containerBackground(.fill.tertiary, for: .widget)
@@ -81,8 +63,6 @@ struct AgroWeatherWidget: Widget {
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
-
-// MARK: - Data Sharing via App Group
 
 struct EntryService {
     private static let suiteName = "group.com.agroweather.app"
