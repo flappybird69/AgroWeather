@@ -347,6 +347,7 @@
 				B0000025 /* ProfileEditView.swift in Sources */,
 				B0000026 /* LocalWeatherCard.swift in Sources */,
 				B0000027 /* WeatherKitService.swift in Sources */,
+				B0000029 /* FREDChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

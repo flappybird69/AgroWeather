@@ -106,7 +106,7 @@ struct FREDChartView: View {
                             x: .value("Ημερομηνία", point.date),
                             y: .value("Τιμή", point.value)
                         )
-                        .foregroundStyle(.agroGreen)
+                        .foregroundStyle(Color.agroGreen)
                         .interpolationMethod(.catmullRom)
 
                         AreaMark(

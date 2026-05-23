@@ -18,9 +18,9 @@ struct NewsListView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 marketSection
-                euProgramsSection
                 ecPressSection
                 rssSection
+                euProgramsSection
                 citationsSection
             }
             .padding(.vertical, 16)
