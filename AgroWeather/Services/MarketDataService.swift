@@ -161,7 +161,19 @@ actor MarketDataService {
 
 // MARK: - Model
 
-struct MarketPrice: Identifiable {
+enum MarketDataSource: String, Codable {
+    case fred = "FRED"
+    case ecb = "ΕΚΤ"
+
+    var citation: String {
+        switch self {
+        case .fred: return "Πηγή: FRED, Federal Reserve Bank of St. Louis — fred.stlouisfed.org • Open access"
+        case .ecb: return "Πηγή: Ευρωπαϊκή Κεντρική Τράπεζα (ECB SDW) — ecb.europa.eu • Αναπαραγωγή με αναφορά πηγής"
+        }
+    }
+}
+
+struct MarketPrice: Identifiable, Codable {
     let id = UUID()
     let name: String
     let code: String
