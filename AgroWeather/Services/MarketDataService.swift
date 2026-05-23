@@ -186,7 +186,7 @@ enum MarketDataSource: String, Codable {
 }
 
 struct MarketPrice: Identifiable, Codable {
-    let id = UUID()
+    var id = UUID()
     let name: String
     let code: String
     let value: Double
