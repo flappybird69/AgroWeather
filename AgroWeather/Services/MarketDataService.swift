@@ -9,7 +9,7 @@ actor MarketDataService {
     private let fredBase = "https://api.stlouisfed.org/fred/series/observations"
 
     // ECB Statistical Data Warehouse API
-    private let ecbBase = "https://sdw-wsrest.ecb.europa.eu/service/data"
+    private let ecbBase = "https://data-api.ecb.europa.eu/service/data"
 
     func fetchCommodityPrices() async throws -> [MarketPrice] {
         // FRED series IDs for agricultural commodities
