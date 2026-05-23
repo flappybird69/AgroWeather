@@ -35,7 +35,7 @@ struct FarmLogView: View {
     private var emptyState: some View {
         VStack(spacing: 16) {
             Spacer()
-            Image(systemName: "book.clipped.fill")
+            Image(systemName: "book.fill")
                 .font(.system(size: 48))
                 .foregroundColor(.agroGreen.opacity(0.3))
             Text("Ημερολόγιο Εργασιών")

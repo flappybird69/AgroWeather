@@ -40,7 +40,7 @@ struct AgriBotView: View {
                         .fill(Color.agroGreen.opacity(0.08))
                         .frame(width: 100, height: 100)
 
-                    Image(systemName: "leaf.arrow.triangle.circlepath")
+                    Image(systemName: "leaf.arrow.circlepath")
                         .font(.system(size: 44))
                         .foregroundColor(.agroGreen)
                         .symbolRenderingMode(.hierarchical)
