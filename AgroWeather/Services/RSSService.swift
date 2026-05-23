@@ -9,7 +9,7 @@ actor RSSService {
         }
 
         var request = URLRequest(url: url)
-        request.timeoutInterval = 15
+        request.timeoutInterval = 5
 
         let (data, response) = try await URLSession.shared.data(for: request)
 

@@ -27,14 +27,16 @@ struct NewsListView: View {
         }
         .background(Color(.systemGroupedBackground))
         .task {
-            await loadRSS()
-            await loadPrices()
-            await loadECPress()
+            async let rss: () = loadRSS()
+            async let prices: () = loadPrices()
+            async let press: () = loadECPress()
+            _ = await (rss, prices, press)
         }
         .refreshable {
-            await loadRSS()
-            await loadPrices()
-            await loadECPress()
+            async let rss: () = loadRSS()
+            async let prices: () = loadPrices()
+            async let press: () = loadECPress()
+            _ = await (rss, prices, press)
         }
     }
 

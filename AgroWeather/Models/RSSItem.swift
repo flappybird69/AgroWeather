@@ -45,5 +45,5 @@ struct RSSSource: Identifiable, Codable {
         icon: "tractor.fill"
     )
 
-    static let all: [RSSSource] = [.capReform, .agriLand, .euractiv, .ecAgriculture, .farmingUK]
+    static let all: [RSSSource] = [.capReform]
 }
