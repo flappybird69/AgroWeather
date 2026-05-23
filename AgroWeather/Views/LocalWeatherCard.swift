@@ -13,8 +13,13 @@ struct LocalWeatherCard: View {
                         .frame(width: 36)
 
                     VStack(alignment: .leading, spacing: 1) {
-                        Text("\(String(format: "%.0f°C", w.temperature))")
-                            .font(.system(size: 22, weight: .bold, design: .rounded))
+                        HStack(alignment: .firstTextBaseline, spacing: 6) {
+                            Text("\(String(format: "%.0f°C", w.temperature))")
+                                .font(.system(size: 22, weight: .bold, design: .rounded))
+                            Text("αισθ. \(String(format: "%.0f°C", w.feelsLike))")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
 
                         Text(w.condition)
                             .font(.caption)

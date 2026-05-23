@@ -24,9 +24,10 @@ struct FarmLogView: View {
             AddLogEntryView { entry in
                 logEntries.insert(entry, at: 0)
                 saveEntries()
-                if entry.reminderDate != nil {
-                    Task { await ReminderManager.shared.scheduleReminder(for: entry) }
-                }
+                        if entry.reminderDate != nil {
+                            let enabled = UserDefaults.standard.bool(forKey: "reminders_enabled")
+                            if enabled { Task { await ReminderManager.shared.scheduleReminder(for: entry) } }
+                        }
             }
         }
     }

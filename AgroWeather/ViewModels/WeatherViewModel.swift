@@ -16,10 +16,15 @@ final class WeatherViewModel {
 
     private let fieldsKey = "saved_fields"
     private let selectedFieldIdKey = "selected_field_id"
+    private let weatherCacheKey = "cached_weather_json"
     private let weatherService = WeatherService.shared
     private let cloudStore = NSUbiquitousKeyValueStore.default
     private let cloudFieldsKey = "icloud_saved_fields"
     private let cloudSelectedKey = "icloud_selected_field_id"
+    private let defaults = UserDefaults.standard
+
+    var iCloudSyncEnabled: Bool { defaults.bool(forKey: "icloud_sync_enabled") }
+    var remindersEnabled: Bool { defaults.bool(forKey: "reminders_enabled") }
 
     // MARK: - Core Weather
 
@@ -56,80 +61,90 @@ final class WeatherViewModel {
     var showComparison: Bool { fields.count >= 2 }
 
     init() {
+        if defaults.object(forKey: "icloud_sync_enabled") == nil { defaults.set(true, forKey: "icloud_sync_enabled") }
+        if defaults.object(forKey: "reminders_enabled") == nil { defaults.set(true, forKey: "reminders_enabled") }
         listenForCloudChanges()
         loadFields()
-        syncFromCloud()
+        loadCachedWeather()
+        if iCloudSyncEnabled { syncFromCloud() }
     }
 
     // MARK: - iCloud Sync
 
     private func listenForCloudChanges() {
         NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(cloudDidChange),
+            self, selector: #selector(cloudDidChange),
             name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
             object: cloudStore
         )
-        cloudStore.synchronize()
     }
 
     @objc private func cloudDidChange() {
+        guard iCloudSyncEnabled else { return }
         syncFromCloud()
     }
 
     private func syncFromCloud() {
-        guard !isSyncingFromCloud else { return }
+        guard iCloudSyncEnabled, !isSyncingFromCloud else { return }
         isSyncingFromCloud = true
         defer { isSyncingFromCloud = false }
 
         if fields.isEmpty {
-            if let data = cloudStore.data(forKey: cloudFieldsKey) {
-                if let cloudFields = try? JSONDecoder().decode([Field].self, from: data) {
-                    fields = cloudFields
-                    saveLocal()
-                    if let savedId = cloudStore.string(forKey: cloudSelectedKey),
-                       let field = fields.first(where: { $0.id.uuidString == savedId }) {
-                        selectedField = field
-                    } else {
-                        selectedField = fields.first
-                    }
-                }
+            if let data = cloudStore.data(forKey: cloudFieldsKey),
+               let cloudFields = try? JSONDecoder().decode([Field].self, from: data) {
+                fields = cloudFields
+                saveLocal()
+                if let savedId = cloudStore.string(forKey: cloudSelectedKey),
+                   let field = fields.first(where: { $0.id.uuidString == savedId }) {
+                    selectedField = field
+                } else { selectedField = fields.first }
             }
         }
     }
 
     private func pushToCloud() {
-        guard let data = try? JSONEncoder().encode(fields) else { return }
+        guard iCloudSyncEnabled, let data = try? JSONEncoder().encode(fields) else { return }
         cloudStore.set(data, forKey: cloudFieldsKey)
         cloudStore.set(selectedField?.id.uuidString, forKey: cloudSelectedKey)
         cloudStore.synchronize()
     }
 
+    // MARK: - Offline Cache
+
+    private func loadCachedWeather() {
+        guard let json = defaults.string(forKey: weatherCacheKey),
+              let data = json.data(using: .utf8),
+              let response = try? JSONDecoder().decode(WeatherResponse.self, from: data) else { return }
+        weatherData = response.toWeatherData()
+    }
+
+    private func saveWeatherCache() { }
+
+    private func cacheWeatherResponse(_ response: WeatherResponse) {
+        guard let data = try? JSONEncoder().encode(response),
+              let json = String(data: data, encoding: .utf8) else { return }
+        defaults.set(json, forKey: weatherCacheKey)
+    }
+
     // MARK: - Persistence
 
     func loadFields() {
-        guard let data = UserDefaults.standard.data(forKey: fieldsKey) else { return }
-        do {
-            fields = try JSONDecoder().decode([Field].self, from: data)
-            restoreSelection()
-        } catch {
-            fields = []
-        }
+        guard let data = defaults.data(forKey: fieldsKey) else { return }
+        fields = (try? JSONDecoder().decode([Field].self, from: data)) ?? []
+        restoreSelection()
     }
 
     private func restoreSelection() {
-        if let savedId = UserDefaults.standard.string(forKey: selectedFieldIdKey),
+        if let savedId = defaults.string(forKey: selectedFieldIdKey),
            let field = fields.first(where: { $0.id.uuidString == savedId }) {
             selectedField = field
-        } else {
-            selectedField = fields.first
-        }
+        } else { selectedField = fields.first }
     }
 
     private func saveLocal() {
         guard let data = try? JSONEncoder().encode(fields) else { return }
-        UserDefaults.standard.set(data, forKey: fieldsKey)
-        UserDefaults.standard.set(selectedField?.id.uuidString, forKey: selectedFieldIdKey)
+        defaults.set(data, forKey: fieldsKey)
+        defaults.set(selectedField?.id.uuidString, forKey: selectedFieldIdKey)
     }
 
     private func persist() {
@@ -151,12 +166,17 @@ final class WeatherViewModel {
     func deleteField(_ field: Field) {
         fields.removeAll { $0.id == field.id }
         fieldComparisons.removeAll { $0.fieldId == field.id }
-        if selectedField?.id == field.id {
-            selectedField = fields.first
-        }
+        if selectedField?.id == field.id { selectedField = fields.first }
         persist()
         HapticManager.medium()
         if showComparison { Task { await loadComparisonData() } }
+    }
+
+    func renameField(_ field: Field, newName: String) {
+        guard let idx = fields.firstIndex(where: { $0.id == field.id }) else { return }
+        fields[idx].name = newName
+        if selectedField?.id == field.id { selectedField = fields[idx] }
+        persist()
     }
 
     func selectField(_ field: Field) {
@@ -168,23 +188,16 @@ final class WeatherViewModel {
 
     // MARK: - Weather
 
-    @MainActor
     func fetchWeather() async {
         guard let field = selectedField else { return }
-
         isLoading = true
         errorMessage = nil
 
         do {
-            let response = try await weatherService.fetchWeather(
-                latitude: field.latitude,
-                longitude: field.longitude
-            )
+            let response = try await weatherService.fetchWeather(latitude: field.latitude, longitude: field.longitude)
             weatherData = response.toWeatherData()
-
-            if weatherData?.hasFrostRisk == true {
-                HapticManager.frostAlert()
-            }
+            cacheWeatherResponse(response)
+            if weatherData?.hasFrostRisk == true { HapticManager.frostAlert() }
         } catch let error as WeatherError {
             errorMessage = error.errorDescription
             showError = true
@@ -192,16 +205,13 @@ final class WeatherViewModel {
             errorMessage = "Προέκυψε απρόβλεπτο σφάλμα"
             showError = true
         }
-
         isLoading = false
     }
 
     @MainActor
     func fetchAll() async {
         await fetchWeather()
-        if showComparison {
-            await loadComparisonData()
-        }
+        if showComparison { await loadComparisonData() }
     }
 
     func refresh() async {
@@ -214,52 +224,22 @@ final class WeatherViewModel {
     // MARK: - Field Comparison
 
     func loadComparisonData() async {
-        guard fields.count >= 2 else {
-            fieldComparisons = []
-            return
-        }
-
+        guard fields.count >= 2 else { fieldComparisons = []; return }
         isComparisonLoading = true
-
         var results: [FieldComparison] = []
         for field in fields {
             if let cached = fieldComparisons.first(where: { $0.fieldId == field.id }) {
-                results.append(cached)
-                continue
+                results.append(cached); continue
             }
             do {
-                let response = try await weatherService.fetchWeather(
-                    latitude: field.latitude,
-                    longitude: field.longitude
-                )
+                let response = try await weatherService.fetchWeather(latitude: field.latitude, longitude: field.longitude)
                 if let data = response.toWeatherData() {
-                    results.append(FieldComparison(
-                        fieldId: field.id,
-                        fieldName: field.name,
-                        soilMoisturePercent: data.currentSoilMoisturePercent,
-                        soilTemperature: data.current.soilTemperature,
-                        evapotranspiration: data.current.evapotranspiration,
-                        vpd: data.current.vaporPressureDeficit,
-                        temperature: data.current.temperature,
-                        humidity: data.current.humidity,
-                        windSpeed: data.current.windSpeed
-                    ))
+                    results.append(FieldComparison(fieldId: field.id, fieldName: field.name, soilMoisturePercent: data.currentSoilMoisturePercent, soilTemperature: data.current.soilTemperature, evapotranspiration: data.current.evapotranspiration, vpd: data.current.vaporPressureDeficit, temperature: data.current.temperature, humidity: data.current.humidity, windSpeed: data.current.windSpeed))
                 }
             } catch {
-                results.append(FieldComparison(
-                    fieldId: field.id,
-                    fieldName: field.name,
-                    soilMoisturePercent: nil,
-                    soilTemperature: nil,
-                    evapotranspiration: nil,
-                    vpd: nil,
-                    temperature: nil,
-                    humidity: nil,
-                    windSpeed: nil
-                ))
+                results.append(FieldComparison(fieldId: field.id, fieldName: field.name, soilMoisturePercent: nil, soilTemperature: nil, evapotranspiration: nil, vpd: nil, temperature: nil, humidity: nil, windSpeed: nil))
             }
         }
-
         fieldComparisons = results
         isComparisonLoading = false
     }

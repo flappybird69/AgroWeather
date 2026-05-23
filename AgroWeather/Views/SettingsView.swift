@@ -19,6 +19,12 @@ struct SettingsView: View {
     @AppStorage("icloud_sync_enabled") private var iCloudSync = true
     @AppStorage("reminders_enabled") private var remindersEnabled = true
 
+    private var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "\(version) (\(build))"
+    }
+
     var body: some View {
         Form {
             Section {
@@ -89,7 +95,7 @@ struct SettingsView: View {
 
             Section {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("AgroWeather v1.0")
+                    Text("AgroWeather \(appVersion)")
                         .font(.subheadline.weight(.semibold))
 
                     Text("""

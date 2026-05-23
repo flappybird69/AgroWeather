@@ -46,6 +46,7 @@
 		B0000025 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000027 /* ProfileEditView.swift */; };
 		B0000026 /* LocalWeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000028 /* LocalWeatherCard.swift */; };
 		B0000027 /* WeatherKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000029 /* WeatherKitService.swift */; };
+		B0000028 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A0000030 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +92,7 @@
 		A0000027 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		A0000028 /* LocalWeatherCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWeatherCard.swift; sourceTree = "<group>"; };
 		A0000029 /* WeatherKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitService.swift; sourceTree = "<group>"; };
+		A0000030 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				A000000E /* Info.plist */,
 				A0000010 /* Assets.xcassets */,
 				A0000011 /* AgroWeather.entitlements */,
+				A0000030 /* PrivacyInfo.xcprivacy */,
 				G0000003 /* Models */,
 				G0000004 /* Services */,
 				G0000005 /* ViewModels */,
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B000000F /* Assets.xcassets in Resources */,
+				B0000028 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

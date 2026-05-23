@@ -78,8 +78,9 @@ struct ProfileCard: View {
         let hour = Calendar.current.component(.hour, from: Date())
         switch hour {
         case 5..<12: return "Καλημέρα"
-        case 12..<17: return "Καλησπέρα"
-        default: return "Καλησπέρα"
+        case 12..<18: return "Καλησπέρα"
+        case 18..<22: return "Καλησπέρα"
+        default: return "Καληνύχτα"
         }
     }
 }

@@ -4,6 +4,9 @@ struct DashboardView: View {
     @Environment(WeatherViewModel.self) private var viewModel
     @State private var showAddField = false
     @State private var showSettings = false
+    @State private var showFieldManagement = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
 
     var body: some View {
         Group {
@@ -19,6 +22,22 @@ struct DashboardView: View {
         .sheet(isPresented: $showSettings) {
             NavigationStack {
                 ProfileEditView()
+            }
+        }
+        .sheet(isPresented: $showFieldManagement) {
+            NavigationStack {
+                FieldManagementView()
+            }
+        }
+        .alert("Σφάλμα", isPresented: $showAlert) {
+            Button("OK", role: .cancel) { viewModel.showError = false }
+        } message: {
+            Text(alertMessage)
+        }
+        .onChange(of: viewModel.showError) { _, newValue in
+            if newValue {
+                alertMessage = viewModel.errorMessage ?? "Άγνωστο σφάλμα"
+                showAlert = true
             }
         }
     }
@@ -154,6 +173,13 @@ struct DashboardView: View {
                             .background(field.id == viewModel.selectedField?.id ? Color.agroGreen : Color(.secondarySystemGroupedBackground))
                             .clipShape(Capsule())
                             .id(field.id)
+                        }
+                        .contextMenu {
+                            Button {
+                                showFieldManagement = true
+                            } label: {
+                                Label("Διαχείριση χωραφιών", systemImage: "gear")
+                            }
                         }
                     }
 
