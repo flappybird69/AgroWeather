@@ -65,7 +65,7 @@ struct AgriBotView: View {
                     .clipShape(Capsule())
                 }
 
-                Text("Ρώτα με ό,τι σε απασχολεί:")
+                Text("Ρώτα τον Στάθη")
                     .font(.body)
                     .foregroundColor(.secondary)
 
@@ -119,7 +119,7 @@ struct AgriBotView: View {
         VStack(spacing: 0) {
             Divider()
             HStack(spacing: 10) {
-                TextField("Ρώτα τον Αγρονόμο...", text: $inputText)
+                TextField("Ρώτα τον Στάθη...", text: $inputText)
                     .font(.body)
                     .focused($isFocused)
                     .padding(12)
