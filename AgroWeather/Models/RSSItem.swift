@@ -28,22 +28,6 @@ struct RSSSource: Identifiable, Codable {
         id: UUID(), name: "CAP Reform EU", url: "https://www.capreform.eu/feed/",
         icon: "star.fill"
     )
-    static let agriLand = RSSSource(
-        id: UUID(), name: "AgriLand EU", url: "https://www.agriland.ie/farming-news/feed/",
-        icon: "newspaper.fill"
-    )
-    static let euractiv = RSSSource(
-        id: UUID(), name: "Euractiv Agri", url: "https://www.euractiv.com/sections/agriculture-food/feed/",
-        icon: "eurosign.circle.fill"
-    )
-    static let ecAgriculture = RSSSource(
-        id: UUID(), name: "EC Agriculture", url: "https://agriculture.ec.europa.eu/news/all_en.rss",
-        icon: "building.columns.fill"
-    )
-    static let farmingUK = RSSSource(
-        id: UUID(), name: "Farming UK", url: "https://www.farminguk.com/rss.php",
-        icon: "tractor.fill"
-    )
 
     static let all: [RSSSource] = [.capReform]
 }
