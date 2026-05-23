@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import UIKit
+import WidgetKit
 
 @Observable
 final class WeatherViewModel {
@@ -126,6 +127,15 @@ final class WeatherViewModel {
         defaults.set(json, forKey: weatherCacheKey)
     }
 
+    private func updateWidget() {
+        guard let data = weatherData else { return }
+        let suite = UserDefaults(suiteName: "group.com.agroweather.app")
+        suite?.set(data.currentSoilMoisturePercent, forKey: "widget_moisture")
+        suite?.set(data.current.soilTemperature, forKey: "widget_temperature")
+        suite?.set(selectedField?.name ?? "Χωράφι", forKey: "widget_field")
+        WidgetCenter.shared.reloadTimelines(ofKind: "AgroWeatherWidget")
+    }
+
     // MARK: - Persistence
 
     func loadFields() {
@@ -197,6 +207,7 @@ final class WeatherViewModel {
             let response = try await weatherService.fetchWeather(latitude: field.latitude, longitude: field.longitude)
             weatherData = response.toWeatherData()
             cacheWeatherResponse(response)
+            updateWidget()
             if weatherData?.hasFrostRisk == true { HapticManager.frostAlert() }
         } catch let error as WeatherError {
             errorMessage = error.errorDescription

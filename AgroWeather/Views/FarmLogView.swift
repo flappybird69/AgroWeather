@@ -76,11 +76,19 @@ struct FarmLogView: View {
         .scrollContentBackground(.hidden)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    showAddEntry = true
-                } label: {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title3).foregroundColor(.agroGreen)
+                HStack(spacing: 4) {
+                    Button {
+                        exportCSV()
+                    } label: {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.title3).foregroundColor(.agroGreen)
+                    }
+                    Button {
+                        showAddEntry = true
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3).foregroundColor(.agroGreen)
+                    }
                 }
             }
         }
@@ -282,6 +290,40 @@ struct FarmLogView: View {
         guard let data = try? JSONEncoder().encode(logEntries) else { return }
         cloudStore.set(data, forKey: cloudLogKey)
         cloudStore.synchronize()
+    }
+
+    private func exportCSV() {
+        var csv = "Ημερομηνία,Τύπος,Περιγραφή,Χωράφι,Διάρκεια,Ποσότητα,Κόστος,Έσοδα,Έξοδα,Φυτό,Φάρμακο,PHI,Απόδοση\n"
+        let f = DateFormatter()
+        f.locale = Locale(identifier: "el_GR")
+        f.dateFormat = "dd/MM/yyyy HH:mm"
+
+        for e in logEntries {
+            let date = f.string(from: e.date)
+            let type = e.type.rawValue
+            let notes = e.notes.replacingOccurrences(of: ",", with: " ")
+            let field = e.fieldName ?? ""
+            let duration = e.formattedDuration ?? ""
+            let amount = e.formattedAmount ?? ""
+            let cost = e.formattedCost ?? ""
+            let income = e.income.map { String(format: "%.2f€", $0) } ?? ""
+            let expenses = e.totalExpenses > 0 ? String(format: "%.2f€", e.totalExpenses) : ""
+            let crop = e.crop ?? ""
+            let chem = e.chemicalName ?? ""
+            let phi = e.phiDays.map { "\($0) ημέρες" } ?? ""
+            let yield_ = e.yieldAmount.map { "\($0) \(e.yieldUnit ?? "kg")" } ?? ""
+            csv += "\(date),\(type),\(notes),\(field),\(duration),\(amount),\(cost),\(income),\(expenses),\(crop),\(chem),\(phi),\(yield_)\n"
+        }
+
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent("AgroWeather_Ημερολόγιο.csv")
+        try? csv.write(to: url, atomically: true, encoding: .utf8)
+
+        let av = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let root = windowScene.windows.first?.rootViewController {
+            root.present(av, animated: true)
+        }
     }
 
     private func preloadImages() async {
