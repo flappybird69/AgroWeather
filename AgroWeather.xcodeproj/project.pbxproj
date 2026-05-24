@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -47,9 +47,9 @@
 		B0000026 /* LocalWeatherCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000028 /* LocalWeatherCard.swift */; };
 		B0000027 /* WeatherKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000029 /* WeatherKitService.swift */; };
 		B0000028 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A0000030 /* PrivacyInfo.xcprivacy */; };
-		B0000031 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0000033 /* Config.plist */; };
 		B0000029 /* FREDChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000031 /* FREDChartView.swift */; };
 		B0000030 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000032 /* ChatBubble.swift */; };
+		B0000031 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0000033 /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,10 +116,6 @@
 		A0000033 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		52E63C972FC21C08006D010D /* AgroWeatherWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = AgroWeatherWidget; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		F0000001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -144,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				G0000002 /* AgroWeather */,
-				52E63C972FC21C08006D010D /* AgroWeatherWidget */,
 				52E63C922FC21C08006D010D /* Frameworks */,
 				G0000007 /* Products */,
 			);
@@ -490,10 +485,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AgroWeather/AgroWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = J84L4DVVNR;
 				INFOPLIST_FILE = AgroWeather/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LAUNCH_SCREEN_STORYBOARD = LaunchScreen;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
@@ -511,10 +506,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AgroWeather/AgroWeather.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = J84L4DVVNR;
 				INFOPLIST_FILE = AgroWeather/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LAUNCH_SCREEN_STORYBOARD = LaunchScreen;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
