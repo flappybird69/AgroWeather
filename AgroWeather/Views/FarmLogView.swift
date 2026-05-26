@@ -91,10 +91,10 @@ struct FarmLogView: View {
             }
         }
         .background(Color(.systemGroupedBackground))
-        .safeAreaInset(edge: .top, spacing: 0) {
-            HStack { Spacer(); ChatBubble(); Spacer() }
-                .padding(.top, 4).padding(.bottom, 4)
-                .background(Color(.systemGroupedBackground))
+        .overlay(alignment: .topTrailing) {
+            ChatBubble()
+                .padding(.trailing, 16)
+                .padding(.top, 8)
         }
         .scrollContentBackground(.hidden)
         .toolbar {
