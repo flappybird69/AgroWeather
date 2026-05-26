@@ -32,7 +32,7 @@ struct SplashScreen: View {
                         ForEach(0..<3) { i in
                             Circle()
                                 .stroke(Color.agroGreen.opacity(0.08 - Double(i) * 0.02), lineWidth: 1)
-                                .frame(width: 130 + CGFloat(i * 40))
+                                .frame(width: 180 + CGFloat(i * 60))
                                 .scaleEffect(glowScale + CGFloat(i) * 0.1)
                                 .opacity(glowScale * 0.5)
                         }
@@ -40,38 +40,38 @@ struct SplashScreen: View {
                         // Pulsing glow
                         Circle()
                             .fill(Color.agroGreen)
-                            .frame(width: 100)
-                            .opacity(0.08 * glowScale)
-                            .blur(radius: 24)
+                            .frame(width: 160)
+                            .opacity(0.06 * glowScale)
+                            .blur(radius: 30)
 
                         // Large leaf with hole — draw leaf, then punch a circle
                         // Using compositingGroup + blendMode for the cutout
                         Image(systemName: "leaf.fill")
-                            .font(.system(size: 72))
+                            .font(.system(size: 120))
                             .foregroundColor(.agroGreen)
                             .rotationEffect(.degrees(rotation))
                             .overlay(
                                 Circle()
                                     .fill(.white)
-                                    .frame(width: 26, height: 26)
-                                    .offset(y: 3)
+                                    .frame(width: 38, height: 38)
+                                    .offset(y: 4)
                                     .blendMode(.destinationOut)
                             )
                             .compositingGroup()
 
                         // Person visible inside the hole
                         Image(systemName: "person.fill")
-                            .font(.system(size: 11))
+                            .font(.system(size: 16))
                             .foregroundColor(.agroGreen)
-                            .offset(y: 3)
+                            .offset(y: 4)
 
                         // Small accent dots orbiting
                         ForEach(0..<4) { i in
                             Circle()
                                 .fill(Color.agroGreen.opacity(0.25))
                                 .frame(width: 4, height: 4)
-                                .offset(x: 65 * cos(CGFloat(i) * .pi / 2 + rotation * .pi / 180))
-                                .offset(y: 65 * sin(CGFloat(i) * .pi / 2 + rotation * .pi / 180))
+                                .offset(x: 105 * cos(CGFloat(i) * .pi / 2 + rotation * .pi / 180))
+                                .offset(y: 105 * sin(CGFloat(i) * .pi / 2 + rotation * .pi / 180))
                         }
                     }
                     .scaleEffect(logoScale)
