@@ -9,8 +9,23 @@ struct SplashScreen: View {
     @State private var subtitleOpacity = 0.0
     @State private var loadingProgress = 0.0
     @State private var poweredOpacity = 0.0
+    @State private var quoteIndex = 0
+    @State private var quoteOpacity = 0.0
     @State private var isActive = false
     @AppStorage("has_seen_onboarding") private var hasSeenOnboarding = false
+
+    private let quotes: [(String, String)] = [
+        ("Η γη δεν κληρονομείται από τους γονείς μας, δανείζεται από τα παιδιά μας.", "— Αρχαία Παροιμία"),
+        ("Ὅστις γῆν ἐργάζεται, πρὸς πάσας ἀρετὰς εὖ πέφυκεν.", "— Σωκράτης"),
+        ("Το λάδι βγαίνει από τον ιδρώτα του ελαιοπαραγωγού.", "— Κρητική Παροιμία"),
+        ("Ο καλός αγρότης διαβάζει τον καιρό πριν τον μετεωρολόγο.", "— Λαϊκή Σοφία"),
+        ("Δίχως νερό και ήλιο, ούτε η ελιά καρπίζει.", "— Παροιμία"),
+        ("Το χωράφι θέλει αγάπη, όχι μόνο ιδρώτα.", "— Γεωργική Παροιμία"),
+        ("Ούτε η πιο καλή βροχή δεν ωφελεί αν το χώμα δεν είναι έτοιμο.", "— Λαϊκό"),
+        ("Το ραντισμένο δέντρο δεν φοβάται το σκουλήκι.", "— Παροιμία"),
+        ("Αγρότης χωρίς ημερολόγιο είναι καπετάνιος χωρίς πυξίδα.", "— Σύγχρονο"),
+        ("Το καλό κρασί ξεκινά από το σωστό κλάδεμα.", "— Αμπελουργική"),
+    ]
 
     var body: some View {
         if isActive {
@@ -89,6 +104,22 @@ struct SplashScreen: View {
                         .padding(.top, 4)
                         .opacity(subtitleOpacity)
 
+                    // Rotating inspirational quotes
+                    VStack(spacing: 4) {
+                        Text(quotes[quoteIndex].0)
+                            .font(.system(size: 12, weight: .medium, design: .serif))
+                            .foregroundColor(.secondary.opacity(0.7))
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 40)
+                            .lineSpacing(2)
+                        Text(quotes[quoteIndex].1)
+                            .font(.system(size: 10, weight: .regular, design: .serif))
+                            .foregroundColor(.secondary.opacity(0.4))
+                    }
+                    .frame(height: 60)
+                    .padding(.top, 16)
+                    .opacity(quoteOpacity)
+
                     Spacer()
 
                     // Smooth loading bar
@@ -140,6 +171,18 @@ struct SplashScreen: View {
 
                 // Phase 6: Powered by fades
                 withAnimation(.easeOut.delay(2.0)) { poweredOpacity = 1.0 }
+
+                // Phase 6b: Start rotating quotes (cycle every 1.2s)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    withAnimation(.easeOut(duration: 0.6)) { quoteOpacity = 1.0 }
+                    Timer.scheduledTimer(withTimeInterval: 1.2, repeats: true) { t in
+                        withAnimation(.easeInOut(duration: 0.3)) { quoteOpacity = 0 }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            quoteIndex = (quoteIndex + 1) % quotes.count
+                            withAnimation(.easeInOut(duration: 0.3)) { quoteOpacity = 1.0 }
+                        }
+                    }
+                }
 
                 // Phase 7: Transition after 4s
                 DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
