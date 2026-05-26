@@ -16,11 +16,7 @@
     <string>Χωράφι &amp; Μετεωρολογία</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
-	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
+<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Χρειαζόμαστε πρόσβαση στην κάμερα για να τραβήξετε φωτογραφίες των χωραφιών σας και να τις αποθηκεύσετε στο ημερολόγιο εργασιών.</string>
