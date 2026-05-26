@@ -4,6 +4,11 @@ struct FarmLogView: View {
     @Environment(WeatherViewModel.self) private var viewModel
     @State private var logEntries: [FarmLogEntry] = []
     @State private var showAddEntry = false
+    @State private var sprayMode = false
+
+    private var filteredEntries: [FarmLogEntry] {
+        sprayMode ? logEntries.filter { $0.type == .spraying } : logEntries
+    }
 
     private let logKey = "farm_log_entries"
     private let cloudLogKey = "icloud_farm_log_entries"
@@ -60,7 +65,20 @@ struct FarmLogView: View {
 
     private var content: some View {
         List {
-            ForEach(logEntries) { entry in
+            if sprayMode && filteredEntries.isEmpty {
+                Section {
+                    VStack(spacing: 12) {
+                        Image(systemName: "wind").font(.system(size: 36)).foregroundColor(.orange.opacity(0.3))
+                        Text("Δεν υπάρχουν καταγεγραμμένοι ψεκασμοί")
+                            .font(.subheadline).foregroundColor(.secondary)
+                        Text("Οι ψεκασμοί καταγράφονται από το Ημερολόγιο → Νέα Καταγραφή → Ψεκασμός")
+                            .font(.caption).foregroundColor(.secondary.opacity(0.7)).multilineTextAlignment(.center)
+                    }
+                    .frame(maxWidth: .infinity).padding(20)
+                    .listRowBackground(Color.clear)
+                }
+            }
+            ForEach(filteredEntries) { entry in
                 logRow(entry)
             }
             .onDelete { indexSet in
@@ -82,6 +100,12 @@ struct FarmLogView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 HStack(spacing: 4) {
+                    Button {
+                        sprayMode.toggle()
+                    } label: {
+                        Image(systemName: sprayMode ? "wind.circle.fill" : "wind")
+                            .font(.title3).foregroundColor(sprayMode ? .orange : .agroGreen)
+                    }
                     Button {
                         exportCSV()
                     } label: {

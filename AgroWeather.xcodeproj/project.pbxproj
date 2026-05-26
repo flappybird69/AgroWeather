@@ -50,6 +50,8 @@
 		B0000029 /* FREDChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000031 /* FREDChartView.swift */; };
 		B0000030 /* ChatBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000032 /* ChatBubble.swift */; };
 		B0000031 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = A0000033 /* Config.plist */; };
+		B0000032 /* IrrigationCalculatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000034 /* IrrigationCalculatorView.swift */; };
+		B0000033 /* ProfitabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000035 /* ProfitabilityView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -114,6 +116,8 @@
 		A0000031 /* FREDChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FREDChartView.swift; sourceTree = "<group>"; };
 		A0000032 /* ChatBubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubble.swift; sourceTree = "<group>"; };
 		A0000033 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		A0000034 /* IrrigationCalculatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrrigationCalculatorView.swift; sourceTree = "<group>"; };
+		A0000035 /* ProfitabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfitabilityView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +229,8 @@
 				A0000028 /* LocalWeatherCard.swift */,
 				A0000031 /* FREDChartView.swift */,
 				A0000032 /* ChatBubble.swift */,
+				A0000034 /* IrrigationCalculatorView.swift */,
+				A0000035 /* ProfitabilityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +357,8 @@
 				B0000027 /* WeatherKitService.swift in Sources */,
 				B0000029 /* FREDChartView.swift in Sources */,
 				B0000030 /* ChatBubble.swift in Sources */,
+				B0000032 /* IrrigationCalculatorView.swift in Sources */,
+				B0000033 /* ProfitabilityView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +501,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -514,6 +526,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agroweatherpro.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

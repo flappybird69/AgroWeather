@@ -122,6 +122,16 @@ struct DashboardView: View {
                         .transition(.opacity)
                 }
 
+                if viewModel.weatherData != nil {
+                    IrrigationCalculatorView()
+                        .padding(.horizontal, 16)
+                        .padding(.top, 16)
+                }
+
+                ProfitabilityView()
+                    .padding(.horizontal, 16)
+                    .padding(.top, 16)
+
                 if let lastUpdated = viewModel.lastUpdated {
                     Text("Τελευταία ενημέρωση: \(lastUpdated, style: .time)")
                         .font(.caption2)
