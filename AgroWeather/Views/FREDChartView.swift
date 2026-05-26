@@ -28,6 +28,7 @@ struct FREDChartView: View {
             .padding(16)
         }
         .background(Color(.systemGroupedBackground))
+        .refreshable { await loadAll() }
         .task { await loadAll() }
     }
 

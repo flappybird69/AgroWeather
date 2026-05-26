@@ -679,7 +679,9 @@ struct AddLogEntryView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 10) {
                     Button {
-                        showCamera = true
+                        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                            showCamera = true
+                        }
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: "camera.fill")

@@ -135,7 +135,7 @@ struct DashboardView: View {
         .background(Color(.systemGroupedBackground))
         .safeAreaInset(edge: .top, spacing: 0) {
             HStack { Spacer(); ChatBubble(); Spacer() }
-                .padding(.top, 4).padding(.bottom, 4)
+                .padding(.top, 4).padding(.bottom, 10)
                 .background(Color(.systemGroupedBackground))
         }
         .refreshable { await viewModel.refresh() }

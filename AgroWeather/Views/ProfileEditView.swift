@@ -34,7 +34,9 @@ struct ProfileEditView: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         Button {
-                            showCamera = true
+                            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                                showCamera = true
+                            }
                         } label: {
                             Label("Φωτογραφία", systemImage: "camera.fill")
                         }

@@ -154,7 +154,7 @@ actor MarketDataService {
             let url = "\(ecbBase)/\(code)?format=jsondata&startPeriod=2024"
             guard let parsedURL = URL(string: url) else { continue }
             var request = URLRequest(url: parsedURL)
-            request.timeoutInterval = 10
+            request.timeoutInterval = 5
 
             guard let (data, _) = try? await URLSession.shared.data(for: request) else { continue }
             guard let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
